@@ -25,7 +25,11 @@ export default class ToolBarView {
   update() {
     for (const child of this.items) {
       const active = child.cmd(this.editorView.state, null, this.editorView);
-      child.element.style.display = active ? '' : 'none';
+      if (active) {
+        child.element.removeAttribute('disabled');
+      } else {
+        child.element.setAttribute('disabled', '');
+      }
     }
   }
 
