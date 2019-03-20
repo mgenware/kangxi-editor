@@ -1,0 +1,77 @@
+{
+  "name": "kangxi",
+  "version": "0.0.0",
+  "description": "<NoDescription>",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "author": "Mgen (https://www.mgenware.com)",
+  "homepage": "https://github.com/mgenware/layit",
+  "bugs": "https://github.com/mgenware/layit/issues",
+  "keywords": [
+    "layit"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgenware/layit.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn run lint && yarn run clean && cross-env NODE_ENV=production rollup -c",
+    "compile": "tsc",
+    "dev": "yarn run clean && cross-env NODE_ENV=development rollup -c -w",
+    "lint": "tslint --project tsconfig.json --config tslint.json",
+    "clean": "rimraf dist",
+    "build_t": "rollup -c"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ]
+  },
+  "dependencies": {
+    "prosemirror-commands": "^1.0.7",
+    "prosemirror-dropcursor": "^1.1.1",
+    "prosemirror-gapcursor": "^1.0.3",
+    "prosemirror-history": "^1.0.4",
+    "prosemirror-inputrules": "^1.0.1",
+    "prosemirror-keymap": "^1.0.1",
+    "prosemirror-menu": "^1.0.5",
+    "prosemirror-model": "^1.7.0",
+    "prosemirror-schema-basic": "^1.0.0",
+    "prosemirror-schema-list": "^1.0.2",
+    "prosemirror-state": "^1.2.2",
+    "prosemirror-view": "^1.8.3",
+    "throw-if-arg-empty": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/prosemirror-commands": "*",
+    "@types/prosemirror-dropcursor": "*",
+    "@types/prosemirror-gapcursor": "*",
+    "@types/prosemirror-history": "*",
+    "@types/prosemirror-inputrules": "*",
+    "@types/prosemirror-keymap": "*",
+    "@types/prosemirror-menu": "*",
+    "@types/prosemirror-model": "*",
+    "@types/prosemirror-schema-basic": "*",
+    "@types/prosemirror-schema-list": "*",
+    "@types/prosemirror-state": "*",
+    "@types/prosemirror-view": "*",
+    "cross-env": "^5.2.0",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.6.0",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-scss": "^1.0.1",
+    "rollup-plugin-typescript2": "^0.20.1",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.3333",
+    "unique-temp-dir": "^1.0.0"
+  }
+}

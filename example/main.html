@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kangxi Example</title>
+    <meta name="author" content="Kang Xi" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="../dist/main.css" />
+  </head>
+
+  <body>
+    <div>
+      <div id="content">
+        <h2>Sample document</h2>
+        <p>This is a sample document, thanks for using <code>kangxi</code></p>
+      </div>
+      <hr />
+      <div class="content">
+        <div id="editor">
+          <div class="kx-toolbar"></div>
+          <div class="kx-content"></div>
+        </div>
+      </div>
+    </div>
+    <script src="../dist/main.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (!window.kangxi) {
+          console.error('kangxi not installed');
+        } else {
+          window.kangxi.mount('#editor');
+        }
+      });
+    </script>
+  </body>
+</html>
