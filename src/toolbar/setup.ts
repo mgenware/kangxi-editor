@@ -1,9 +1,11 @@
 import { toggleMark, setBlockType, wrapIn } from 'prosemirror-commands';
+import { undo, redo } from 'prosemirror-history';
 import { schema } from '../schema/core';
 import toolbarPlugin from './toolbarPlugin';
 import { Plugin } from 'prosemirror-state';
 import icons from './icons';
-import { ToolBarItem } from './toolbarItem';
+import ToolBarItem from './toolbarItem';
+import ToolBarMarkerItem from './toolbarMarkerItem';
 
 const IMG_WIDTH = 18;
 
@@ -30,15 +32,15 @@ function iconBtn(title: string, svg: string) {
 // Create an icon for a heading at the given level
 function heading(level: number) {
   return new ToolBarItem(
-    setBlockType(schema.nodes.heading, { level }),
     textBtn('H' + level, 'H' + level),
+    setBlockType(schema.nodes.heading, { level }),
   );
 }
 
 function separator() {
   const element = document.createElement('span');
   element.className = 'separator';
-  return element;
+  return new ToolBarItem(element);
 }
 
 export default function setup(element: HTMLElement): Plugin {
@@ -47,21 +49,26 @@ export default function setup(element: HTMLElement): Plugin {
     heading(2),
     heading(3),
     new ToolBarItem(
-      setBlockType(schema.nodes.paragraph),
       iconBtn('Normal text', icons.text),
+      setBlockType(schema.nodes.paragraph),
     ),
     separator(),
-    new ToolBarItem(
-      toggleMark(schema.marks.strong),
+    new ToolBarMarkerItem(
       iconBtn('Bold', icons.bold),
+      toggleMark(schema.marks.strong),
+      schema.marks.strong,
     ),
-    new ToolBarItem(
-      toggleMark(schema.marks.em),
+    new ToolBarMarkerItem(
       iconBtn('Italic', icons.italic),
+      toggleMark(schema.marks.em),
+      schema.marks.em,
     ),
     new ToolBarItem(
-      wrapIn(schema.nodes.blockquote),
       iconBtn('Blockquote', icons.quotes),
+      wrapIn(schema.nodes.blockquote),
     ),
+    separator(),
+    new ToolBarItem(iconBtn('Undo', icons.undo), undo),
+    new ToolBarItem(iconBtn('Redo', icons.redo), redo),
   ]);
 }

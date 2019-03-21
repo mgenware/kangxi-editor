@@ -1,41 +1,20 @@
-import { ToolBarItem, ToolBarUIItem } from './toolbarItem';
+import ToolBarItem from './toolbarItem';
 import { EditorView } from 'prosemirror-view';
-import toTypeString from 'to-type-string';
-
-// https://stackoverflow.com/questions/384286/javascript-isdom-how-do-you-check-if-a-javascript-object-is-a-dom-object
-function isElement(o: any) {
-  return typeof HTMLElement === 'object'
-    ? o instanceof HTMLElement // DOM2
-    : o &&
-        typeof o === 'object' &&
-        o !== null &&
-        o.nodeType === 1 &&
-        typeof o.nodeName === 'string';
-}
 
 export default class ToolBarView {
   items: ToolBarItem[];
 
   constructor(
     public container: HTMLElement,
-    uiItems: ToolBarUIItem[],
+    userItems: ToolBarItem[],
     public editorView: EditorView,
   ) {
     const items: ToolBarItem[] = [];
-    for (const child of uiItems) {
-      let element: HTMLElement;
-      if (isElement(child)) {
-        element = child as HTMLElement;
-      } else if (child instanceof ToolBarItem) {
-        const item = child as ToolBarItem;
-        element = item.element;
-        items.push(item);
-      } else {
-        throw new Error(
-          `Unsupported toolbar item type, "${toTypeString(child)}"`,
-        );
+    for (const child of userItems) {
+      if (child.cmd) {
+        items.push(child);
       }
-      container.appendChild(element);
+      container.appendChild(child.element);
     }
     this.items = items;
 
@@ -44,6 +23,7 @@ export default class ToolBarView {
       child.element.addEventListener('mouseup', e => {
         e.preventDefault();
         editorView.focus();
+        // Some commands may need the third param, the editor view
         child.cmd(editorView.state, editorView.dispatch, editorView);
       });
     }
@@ -52,12 +32,7 @@ export default class ToolBarView {
 
   update() {
     for (const child of this.items) {
-      const active = child.cmd(this.editorView.state, null, this.editorView);
-      if (active) {
-        child.element.removeAttribute('disabled');
-      } else {
-        child.element.setAttribute('disabled', '');
-      }
+      child.update(this.editorView.state);
     }
   }
 

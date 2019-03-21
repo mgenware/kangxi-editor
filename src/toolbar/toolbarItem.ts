@@ -1,5 +1,15 @@
-export class ToolBarItem {
-  constructor(public cmd: any, public element: HTMLElement) {}
-}
+import { EditorState } from 'prosemirror-state';
 
-export type ToolBarUIItem = ToolBarItem | HTMLElement;
+export default class ToolBarItem {
+  constructor(public element: HTMLElement, public cmd?: any) {}
+
+  update(state: EditorState) {
+    const active = this.cmd(state);
+    const { element } = this;
+    if (active) {
+      element.classList.remove('is-disabled');
+    } else {
+      element.classList.add('is-disabled');
+    }
+  }
+}

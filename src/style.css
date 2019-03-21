@@ -1,5 +1,8 @@
 .kx-toolbar {
   display: flex;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 0.2rem;
 }
 
 .kx-toolbar button {
@@ -18,7 +21,16 @@
   transition: all 1s ease;
 }
 
-.kx-toolbar button:hover:enabled {
+.kx-toolbar button:hover:not(.is-disabled) {
+  filter: brightness(70%);
+}
+
+.kx-toolbar button.is-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.kx-toolbar button.is-active {
   filter: brightness(70%);
 }
 
