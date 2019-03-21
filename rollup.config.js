@@ -1,7 +1,8 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
-import scss from 'rollup-plugin-scss';
+import postcss from 'rollup-plugin-postcss';
+import autoprefixer from 'autoprefixer';
 
 export default {
   input: 'src/main.ts',
@@ -17,6 +18,10 @@ export default {
     }),
     commonjs(),
     typescript({ cacheRoot: require('unique-temp-dir')() }),
-    scss(),
+    postcss({
+      plugins: [autoprefixer],
+      extract: true,
+      extensions: ['.css'],
+    }),
   ],
 };

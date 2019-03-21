@@ -3,22 +3,23 @@
 }
 
 .kx-toolbar button {
-  display: inline-block;
-  padding: 2px;
+  display: inline-flex;
+  padding: 0.2rem;
+  margin-bottom: 0.5rem;
   margin: 0;
   border-radius: 0.15em;
-  box-sizing: border-box;
   text-decoration: none;
-  background-color: #ededed;
-  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0.17);
   text-align: center;
-  opacity: 0.7;
-  transition: 0.3s;
   vertical-align: top;
+  align-items: center;
+  cursor: pointer;
+  border-color: transparent;
+  filter: brightness(100%);
+  transition: all 1s ease;
 }
 
-.kx-toolbar button:hover {
-  opacity: 1;
+.kx-toolbar button:hover:enabled {
+  filter: brightness(70%);
 }
 
 /* For textual buttons */
