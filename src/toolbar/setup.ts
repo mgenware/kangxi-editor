@@ -63,12 +63,22 @@ export default function setup(element: HTMLElement): Plugin {
       toggleMark(schema.marks.em),
       schema.marks.em,
     ),
-    new ToolBarItem(
-      iconBtn('Blockquote', icons.quotes),
-      wrapIn(schema.nodes.blockquote),
+    new ToolBarMarkerItem(
+      iconBtn('Underline', icons.underline),
+      toggleMark(schema.marks.underline),
+      schema.marks.underline,
     ),
     separator(),
     new ToolBarItem(iconBtn('Undo', icons.undo), undo),
     new ToolBarItem(iconBtn('Redo', icons.redo), redo),
+    separator(),
+    new ToolBarItem(
+      iconBtn('Blockquote', icons.quotes),
+      wrapIn(schema.nodes.blockquote),
+    ),
+    new ToolBarItem(
+      iconBtn('Code', icons.code),
+      toggleMark(schema.marks.code),
+    ),
   ]);
 }
