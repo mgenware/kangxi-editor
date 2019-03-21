@@ -1,14 +1,13 @@
-import { Schema, Node } from 'prosemirror-model';
-
-const pDOM = ['p', 0];
-const blockquoteDOM = ['blockquote', 0];
-const hrDOM = ['hr'];
-const preDOM = ['pre', ['code', 0]];
-const brDOM = ['br'];
+import {
+  Schema,
+  NodeSpec,
+  Node as ProsemirrorNode,
+  MarkSpec,
+} from 'prosemirror-model';
 
 // :: Object
 // [Specs](#model.NodeSpec) for the nodes defined in this schema.
-export const nodes = {
+export const nodes: { [name: string]: NodeSpec } = {
   // :: NodeSpec The top level document node.
   doc: {
     content: 'block+',
@@ -21,7 +20,7 @@ export const nodes = {
     group: 'block',
     parseDOM: [{ tag: 'p' }],
     toDOM() {
-      return pDOM;
+      return ['p', 0];
     },
   },
 
@@ -32,7 +31,7 @@ export const nodes = {
     defining: true,
     parseDOM: [{ tag: 'blockquote' }],
     toDOM() {
-      return blockquoteDOM;
+      return ['blockquote', 0];
     },
   },
 
@@ -41,7 +40,7 @@ export const nodes = {
     group: 'block',
     parseDOM: [{ tag: 'hr' }],
     toDOM() {
-      return hrDOM;
+      return ['hr'];
     },
   },
 
@@ -61,7 +60,7 @@ export const nodes = {
       { tag: 'h5', attrs: { level: 5 } },
       { tag: 'h6', attrs: { level: 6 } },
     ],
-    toDOM(node: Node) {
+    toDOM(node: ProsemirrorNode) {
       return ['h' + node.attrs.level, 0];
     },
   },
@@ -77,7 +76,7 @@ export const nodes = {
     defining: true,
     parseDOM: [{ tag: 'pre', preserveWhitespace: 'full' }],
     toDOM() {
-      return preDOM;
+      return ['pre', ['code', 0]];
     },
   },
 
@@ -101,16 +100,17 @@ export const nodes = {
     parseDOM: [
       {
         tag: 'img[src]',
-        getAttrs(dom: HTMLElement) {
+        getAttrs(dom) {
+          const element = dom as HTMLElement;
           return {
-            src: dom.getAttribute('src'),
-            title: dom.getAttribute('title'),
-            alt: dom.getAttribute('alt'),
+            src: element.getAttribute('src'),
+            title: element.getAttribute('title'),
+            alt: element.getAttribute('alt'),
           };
         },
       },
     ],
-    toDOM(node: Node) {
+    toDOM(node: ProsemirrorNode) {
       return ['img', node.attrs];
     },
   },
@@ -122,17 +122,13 @@ export const nodes = {
     selectable: false,
     parseDOM: [{ tag: 'br' }],
     toDOM() {
-      return brDOM;
+      return ['br'];
     },
   },
 };
 
-const emDOM = ['em', 0];
-const strongDOM = ['strong', 0];
-const codeDOM = ['code', 0];
-
 // :: Object [Specs](#model.MarkSpec) for the marks in the schema.
-export const marks = {
+export const marks: { [name: string]: MarkSpec } = {
   // :: MarkSpec A link. Has `href` and `title` attributes. `title`
   // defaults to the empty string. Rendered and parsed as an `<a>`
   // element.
@@ -145,15 +141,16 @@ export const marks = {
     parseDOM: [
       {
         tag: 'a[href]',
-        getAttrs(dom: HTMLElement) {
+        getAttrs(dom) {
+          const element = dom as HTMLElement;
           return {
-            href: dom.getAttribute('href'),
-            title: dom.getAttribute('title'),
+            href: element.getAttribute('href'),
+            title: element.getAttribute('title'),
           };
         },
       },
     ],
-    toDOM(node: Node) {
+    toDOM(node) {
       return ['a', node.attrs, 0];
     },
   },
@@ -163,13 +160,14 @@ export const marks = {
   em: {
     parseDOM: [{ tag: 'i' }, { tag: 'em' }, { style: 'font-style=italic' }],
     toDOM() {
-      return emDOM;
+      return ['em', 0];
     },
   },
 
   // :: MarkSpec A strong mark. Rendered as `<strong>`, parse rules
   // also match `<b>` and `font-weight: bold`.
   strong: {
+    // ts-ignore
     parseDOM: [
       { tag: 'strong' },
       // This works around a Google Docs misbehavior where
@@ -177,16 +175,21 @@ export const marks = {
       // tags with a font-weight normal.
       {
         tag: 'b',
-        getAttrs: (node: any) => node.style.fontWeight !== 'normal' && null,
+        getAttrs(node) {
+          const element = node as HTMLElement;
+          return element.style.fontWeight !== 'normal' && null;
+        },
       },
       {
         style: 'font-weight',
-        getAttrs: (value: string) =>
-          /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null,
+        getAttrs(node) {
+          const value = node as string;
+          return /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null;
+        },
       },
     ],
     toDOM() {
-      return strongDOM;
+      return ['strong', 0];
     },
   },
 
@@ -194,7 +197,7 @@ export const marks = {
   code: {
     parseDOM: [{ tag: 'code' }],
     toDOM() {
-      return codeDOM;
+      return ['code', 0];
     },
   },
 };
@@ -207,4 +210,4 @@ export const marks = {
 //
 // To reuse elements from this schema, extend or read from its
 // `spec.nodes` and `spec.marks` [properties](#model.Schema.spec).
-export const schema = new Schema({ nodes: nodes as any, marks: marks as any });
+export const schema = new Schema({ nodes, marks });
