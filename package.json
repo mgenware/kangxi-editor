@@ -44,11 +44,11 @@
     "prosemirror-keymap": "^1.0.1",
     "prosemirror-menu": "^1.0.5",
     "prosemirror-model": "^1.7.0",
-    "prosemirror-schema-basic": "^1.0.0",
     "prosemirror-schema-list": "^1.0.2",
     "prosemirror-state": "^1.2.2",
     "prosemirror-view": "^1.8.3",
-    "throw-if-arg-empty": "^2.0.1"
+    "throw-if-arg-empty": "^2.0.1",
+    "to-type-string": "^1.0.0"
   },
   "devDependencies": {
     "@types/prosemirror-commands": "*",
@@ -59,7 +59,6 @@
     "@types/prosemirror-keymap": "*",
     "@types/prosemirror-menu": "*",
     "@types/prosemirror-model": "*",
-    "@types/prosemirror-schema-basic": "*",
     "@types/prosemirror-schema-list": "*",
     "@types/prosemirror-state": "*",
     "@types/prosemirror-view": "*",

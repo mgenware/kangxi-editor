@@ -1,8 +1,9 @@
 import { toggleMark, setBlockType, wrapIn } from 'prosemirror-commands';
-import { schema } from 'prosemirror-schema-basic';
+import { schema } from '../schema/core';
 import toolbarPlugin from './toolbarPlugin';
 import { Plugin } from 'prosemirror-state';
 import icons from './icons';
+import { ToolBarItem } from './toolbarItem';
 
 const IMG_WIDTH = 18;
 
@@ -28,32 +29,39 @@ function iconBtn(title: string, svg: string) {
 
 // Create an icon for a heading at the given level
 function heading(level: number) {
-  return {
-    cmd: setBlockType(schema.nodes.heading, { level }),
-    element: textBtn('H' + level, 'H' + level),
-  };
+  return new ToolBarItem(
+    setBlockType(schema.nodes.heading, { level }),
+    textBtn('H' + level, 'H' + level),
+  );
+}
+
+function separator() {
+  const element = document.createElement('span');
+  element.className = 'separator';
+  return element;
 }
 
 export default function setup(element: HTMLElement): Plugin {
   return toolbarPlugin(element, [
-    {
-      cmd: toggleMark(schema.marks.strong),
-      element: iconBtn('Bold', icons.bold),
-    },
-    {
-      cmd: toggleMark(schema.marks.em),
-      element: iconBtn('Italic', icons.italic),
-    },
-    {
-      cmd: setBlockType(schema.nodes.paragraph),
-      element: iconBtn('Paragraph', icons.paragraph),
-    },
     heading(1),
     heading(2),
     heading(3),
-    {
-      cmd: wrapIn(schema.nodes.blockquote),
-      element: iconBtn('Blockquote', icons.quotes),
-    },
+    new ToolBarItem(
+      setBlockType(schema.nodes.paragraph),
+      iconBtn('Normal text', icons.text),
+    ),
+    separator(),
+    new ToolBarItem(
+      toggleMark(schema.marks.strong),
+      iconBtn('Bold', icons.bold),
+    ),
+    new ToolBarItem(
+      toggleMark(schema.marks.em),
+      iconBtn('Italic', icons.italic),
+    ),
+    new ToolBarItem(
+      wrapIn(schema.nodes.blockquote),
+      iconBtn('Blockquote', icons.quotes),
+    ),
   ]);
 }

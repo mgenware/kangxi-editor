@@ -2,7 +2,7 @@ import { baseKeymap } from 'prosemirror-commands';
 import { keymap } from 'prosemirror-keymap';
 import { EditorState, Transaction } from 'prosemirror-state';
 import { DOMParser } from 'prosemirror-model';
-import { schema } from 'prosemirror-schema-basic';
+import { schema } from './schema/core';
 import { EditorView } from 'prosemirror-view';
 import { undo, redo, history } from 'prosemirror-history';
 import setupToolbar from './toolbar/setup';

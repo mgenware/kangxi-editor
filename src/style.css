@@ -27,3 +27,9 @@
   font-size: 15px;
   font-weight: bold;
 }
+
+.kx-toolbar .separator {
+  border-right: 1px solid #ddd;
+  margin-left: 2px;
+  margin-right: 2px;
+}

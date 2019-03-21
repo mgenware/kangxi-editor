@@ -1,4 +1,5 @@
-export default interface ToolBarItem {
-  cmd: any;
-  element: HTMLElement;
+export class ToolBarItem {
+  constructor(public cmd: any, public element: HTMLElement) {}
 }
+
+export type ToolBarUIItem = ToolBarItem | HTMLElement;
