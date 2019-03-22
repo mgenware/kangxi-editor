@@ -2,12 +2,13 @@ import { baseKeymap } from 'prosemirror-commands';
 import { keymap } from 'prosemirror-keymap';
 import { EditorState, Transaction } from 'prosemirror-state';
 import { DOMParser } from 'prosemirror-model';
-import { schema } from './schema/core';
+import { schema } from './schema/schema';
 import { EditorView } from 'prosemirror-view';
-import { undo, redo, history } from 'prosemirror-history';
+import { history } from 'prosemirror-history';
 import setupToolbar from './toolbar/setup';
 import { throwIfEmpty } from 'throw-if-arg-empty';
 import './style.css';
+import { buildKeymap } from './keys/keymap';
 
 export function mount(selector: string) {
   throwIfEmpty(selector, 'selector');
@@ -32,7 +33,7 @@ export function mount(selector: string) {
       ) as HTMLElement),
       plugins: [
         history(),
-        keymap({ 'Mod-z': undo, 'Mod-y': redo }),
+        keymap(buildKeymap(schema, null)),
         keymap(baseKeymap),
         setupToolbar(toolbarElement as HTMLElement),
       ],

@@ -4,6 +4,7 @@ import em from './em';
 import strong from './strong';
 import code from './code';
 import underline from './underline';
+import strikethrough from './strikethrough';
 
 const marks: { [name: string]: MarkSpec } = {
   link,
@@ -11,5 +12,6 @@ const marks: { [name: string]: MarkSpec } = {
   strong,
   code,
   underline,
+  strikethrough,
 };
 export default marks;

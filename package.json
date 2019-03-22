@@ -59,7 +59,7 @@
     "@types/prosemirror-keymap": "*",
     "@types/prosemirror-menu": "*",
     "@types/prosemirror-model": "*",
-    "@types/prosemirror-schema-list": "*",
+    "@types/prosemirror-schema-list": "^1.0.1",
     "@types/prosemirror-state": "*",
     "@types/prosemirror-view": "*",
     "autoprefixer": "^9.5.0",

@@ -1,11 +1,12 @@
-import { toggleMark, setBlockType, wrapIn } from 'prosemirror-commands';
+import { toggleMark, setBlockType, wrapIn, lift } from 'prosemirror-commands';
 import { undo, redo } from 'prosemirror-history';
-import { schema } from '../schema/core';
+import { schema } from '../schema/schema';
 import toolbarPlugin from './toolbarPlugin';
 import { Plugin } from 'prosemirror-state';
 import icons from './icons';
 import ToolBarItem from './toolbarItem';
 import ToolBarMarkerItem from './toolbarMarkerItem';
+import { wrapInList } from 'prosemirror-schema-list';
 
 const IMG_WIDTH = 18;
 
@@ -68,17 +69,28 @@ export default function setup(element: HTMLElement): Plugin {
       toggleMark(schema.marks.underline),
       schema.marks.underline,
     ),
+    new ToolBarMarkerItem(
+      iconBtn('Strikethrough', icons.strikethrough),
+      toggleMark(schema.marks.strikethrough),
+      schema.marks.strikethrough,
+    ),
     separator(),
-    new ToolBarItem(iconBtn('Undo', icons.undo), undo),
-    new ToolBarItem(iconBtn('Redo', icons.redo), redo),
-    separator(),
+    new ToolBarItem(
+      iconBtn('Numbered list', icons.orderedList),
+      wrapInList(schema.nodes.ordered_list),
+    ),
+    new ToolBarItem(
+      iconBtn('Bullet list', icons.orderedList),
+      wrapInList(schema.nodes.bullet_list),
+    ),
     new ToolBarItem(
       iconBtn('Blockquote', icons.quotes),
       wrapIn(schema.nodes.blockquote),
     ),
-    new ToolBarItem(
-      iconBtn('Code', icons.code),
-      toggleMark(schema.marks.code),
-    ),
+    new ToolBarItem(iconBtn('Decrease indent', icons.indentDecrease), lift),
+    new ToolBarItem(iconBtn('Code', icons.code), toggleMark(schema.marks.code)),
+    separator(),
+    new ToolBarItem(iconBtn('Undo', icons.undo), undo),
+    new ToolBarItem(iconBtn('Redo', icons.redo), redo),
   ]);
 }
