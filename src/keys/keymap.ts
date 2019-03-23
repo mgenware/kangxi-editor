@@ -18,8 +18,7 @@ import { undo, redo } from 'prosemirror-history';
 import { undoInputRule } from 'prosemirror-inputrules';
 import { Schema } from 'prosemirror-model';
 
-const mac =
-  typeof navigator !== 'undefined' ? /Mac/.test(navigator.platform) : false;
+const mac = navigator ? /Mac/.test(navigator.platform) : false;
 
 // :: (Schema, ?Object) → Object
 // Inspect the given schema looking for marks and nodes from the
