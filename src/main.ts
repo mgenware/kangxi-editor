@@ -26,23 +26,28 @@ export class Editor {
   }
 }
 
-export function mount(selector: string, content?: string): Editor {
-  throwIfEmpty(selector, 'selector');
-  content = content || '';
-  const editorElement = document.querySelector(selector);
-  if (!editorElement) {
-    throw new Error(`The selector "${selector}" does not match anything`);
+export function mount(src: string | HTMLElement, content?: string): Editor {
+  throwIfEmpty(src, 'src');
+  let editorElement: HTMLElement;
+  if (typeof src === 'string') {
+    editorElement = document.querySelector(src) as HTMLElement;
+    if (!editorElement) {
+      throw new Error(`The selector "${src}" does not match anything`);
+    }
+  } else {
+    editorElement = src as HTMLElement;
   }
+  content = content || '';
   const toolbarElement = editorElement.querySelector('.kx-toolbar');
   const contentElement = editorElement.querySelector(
     '.kx-content',
   ) as HTMLElement;
 
   if (!toolbarElement) {
-    throw new Error(`ToolBar element not found inside "${selector}"`);
+    throw new Error(`ToolBar element not found`);
   }
   if (!contentElement) {
-    throw new Error(`Content element not found inside "${selector}"`);
+    throw new Error(`Content element not found`);
   }
 
   const srcElement = document.createElement('div') as HTMLElement;

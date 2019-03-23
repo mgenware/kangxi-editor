@@ -9,7 +9,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
     />
-    <link rel="stylesheet" href="../dist/main.css" />
+    <link rel="stylesheet" href="../dist/editor.css" />
     <style>
     #editor {
       padding: 0.5rem;
@@ -36,7 +36,7 @@
         if (!window.kangxi) {
           console.error('kangxi not installed');
         } else {
-          window.editor = window.kangxi.mount('#editor', `<h2>Sample document</h2>
+          window.editor = window.kangxi.mount(document.getElementById('editor'), `<h2>Sample document</h2>
 <p>This is a sample document, thanks for using <code>kangxi</code></p>`);
         }
       });
