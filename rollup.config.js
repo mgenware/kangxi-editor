@@ -16,7 +16,7 @@ const plugins = [
   typescript({ cacheRoot: require('unique-temp-dir')() }),
   postcss({
     plugins: [autoprefixer],
-    extract: true,
+    extract: './dist/editor.css',
     extensions: ['.css'],
   }),
 ];
