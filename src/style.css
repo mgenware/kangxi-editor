@@ -1,3 +1,14 @@
+.kx-editor {
+  background: white;
+  padding: 0.5rem;
+}
+
+.kx-editor .ProseMirror {
+  padding: 0.8rem 0.5rem;
+  height: 250px;
+  overflow-y: scroll;
+}
+
 .kx-toolbar {
   display: flex;
   padding-bottom: 0.2rem;
