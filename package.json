@@ -1,18 +1,18 @@
 {
   "name": "kangxi",
   "version": "0.0.0",
-  "description": "<NoDescription>",
+  "description": "Another WYSIWYG editor",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "author": "Mgen (https://www.mgenware.com)",
-  "homepage": "https://github.com/mgenware/layit",
-  "bugs": "https://github.com/mgenware/layit/issues",
+  "homepage": "https://github.com/mgenware/kangxi",
+  "bugs": "https://github.com/mgenware/kangxi/issues",
   "keywords": [
     "layit"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mgenware/layit.git"
+    "url": "https://github.com/mgenware/kangxi.git"
   },
   "license": "MIT",
   "scripts": {
