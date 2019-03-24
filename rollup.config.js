@@ -31,6 +31,7 @@ export default {
     name: 'kangxi',
     file: 'dist/main.js',
     format: 'umd',
+    exports: 'named',
   },
   plugins,
 };

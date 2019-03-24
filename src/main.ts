@@ -82,11 +82,11 @@ export class Editor {
   ) {}
 
   htmlContent(): string {
-    const root = this.contentElement;
-    if (root.firstElementChild) {
-      return root.firstElementChild.innerHTML;
+    const node = this.contentElement.firstElementChild;
+    if (!node) {
+      return '';
     }
-    return '';
+    return node.innerHTML;
   }
 
   setHtmlContent(html: string) {
