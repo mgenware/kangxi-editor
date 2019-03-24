@@ -7,7 +7,6 @@ import { EditorView } from 'prosemirror-view';
 import { history } from 'prosemirror-history';
 import setupToolbar from './toolbar/setup';
 import { throwIfEmpty } from 'throw-if-arg-empty';
-import './style.css';
 import { buildKeymap } from './keys/keymap';
 
 function createDoc(html: string, schema: Schema): ProsemirrorNode {
@@ -74,8 +73,8 @@ export class Editor {
     return new Editor(view, editorSchema, plugins, contentElement);
   }
 
-  constructor(
-    public core: EditorView,
+  private constructor(
+    public view: EditorView,
     public schema: Schema,
     public plugins: Plugin[],
     public contentElement: HTMLElement,
@@ -93,7 +92,7 @@ export class Editor {
     html = html || '';
     // DO NOT reuse `editorView.state`, `editorView.state.plugins` is always empty.
     const state = createState(html, this.schema, this.plugins);
-    this.core.updateState(state);
+    this.view.updateState(state);
   }
 }
 

@@ -26,7 +26,7 @@ if (isProd) {
 }
 
 export default {
-  input: 'src/main.ts',
+  input: 'src/rollup.main.js',
   output: {
     name: 'kangxi',
     file: 'dist/main.js',
