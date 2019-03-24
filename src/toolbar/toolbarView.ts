@@ -35,8 +35,4 @@ export default class ToolBarView {
       child.update(this.editorView.state);
     }
   }
-
-  destroy() {
-    this.container.remove();
-  }
 }

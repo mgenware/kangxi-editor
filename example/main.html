@@ -26,7 +26,8 @@
           <div class="kx-content"></div>
         </div>
       </div>
-      <button class="button" onclick="outputHtml()">Output HTML</button>
+      <button class="button" onclick="outputHtml()">Get content</button>
+      <button class="button" onclick="setHtml()">Set content</button>
       <hr />
       <pre><code id="htmlOutput"></code></pre>
     </section>
@@ -45,8 +46,15 @@
         if (!window.editor) {
           console.error('Editor not created');
         } else {
-          console.log(window.editor.htmlContent());
           document.getElementById('htmlOutput').textContent = window.editor.htmlContent();
+        }
+      }
+
+      function setHtml() {
+        if (!window.editor) {
+          console.error('Editor not created');
+        } else {
+          window.editor.setHtmlContent(`<p>New <b>document</b></p>`);
         }
       }
     </script>

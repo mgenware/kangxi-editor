@@ -1,8 +1,8 @@
 import { baseKeymap } from 'prosemirror-commands';
 import { keymap } from 'prosemirror-keymap';
-import { EditorState, Transaction } from 'prosemirror-state';
-import { DOMParser, Schema } from 'prosemirror-model';
-import { schema } from './schema/schema';
+import { EditorState, Transaction, Plugin } from 'prosemirror-state';
+import { DOMParser, Schema, Node as ProsemirrorNode } from 'prosemirror-model';
+import { schema as editorSchema } from './schema/schema';
 import { EditorView } from 'prosemirror-view';
 import { history } from 'prosemirror-history';
 import setupToolbar from './toolbar/setup';
@@ -10,10 +10,30 @@ import { throwIfEmpty } from 'throw-if-arg-empty';
 import './style.css';
 import { buildKeymap } from './keys/keymap';
 
+function createDoc(html: string, schema: Schema): ProsemirrorNode {
+  const srcElement = document.createElement('div') as HTMLElement;
+  srcElement.innerHTML = html;
+  return DOMParser.fromSchema(schema).parse(srcElement);
+}
+
+function createState(
+  html: string,
+  schema: Schema,
+  plugins: Plugin[],
+): EditorState {
+  const state = EditorState.create({
+    doc: createDoc(html, schema),
+    schema,
+    plugins,
+  });
+  return state;
+}
+
 export class Editor {
   constructor(
     public core: EditorView,
-    public editorSchema: Schema,
+    public schema: Schema,
+    public plugins: Plugin[],
     public contentElement: HTMLElement,
   ) {}
 
@@ -23,6 +43,13 @@ export class Editor {
       return root.firstElementChild.innerHTML;
     }
     return '';
+  }
+
+  setHtmlContent(html: string) {
+    html = html || '';
+    // DO NOT reuse `editorView.state`, `editorView.state.plugins` is always empty.
+    const state = createState(html, this.schema, this.plugins);
+    this.core.updateState(state);
   }
 }
 
@@ -38,7 +65,9 @@ export function mount(src: string | HTMLElement, content?: string): Editor {
     editorElement = src as HTMLElement;
   }
   content = content || '';
-  const toolbarElement = editorElement.querySelector('.kx-toolbar');
+  const toolbarElement = editorElement.querySelector(
+    '.kx-toolbar',
+  ) as HTMLElement;
   const contentElement = editorElement.querySelector(
     '.kx-content',
   ) as HTMLElement;
@@ -50,18 +79,14 @@ export function mount(src: string | HTMLElement, content?: string): Editor {
     throw new Error(`Content element not found`);
   }
 
-  const srcElement = document.createElement('div') as HTMLElement;
-  srcElement.innerHTML = content;
+  const plugins: Plugin[] = [
+    history(),
+    keymap(buildKeymap(editorSchema, null)),
+    keymap(baseKeymap),
+    setupToolbar(toolbarElement as HTMLElement),
+  ];
+  const state = createState(content, editorSchema, plugins);
 
-  const state = EditorState.create({
-    doc: DOMParser.fromSchema(schema).parse(srcElement),
-    plugins: [
-      history(),
-      keymap(buildKeymap(schema, null)),
-      keymap(baseKeymap),
-      setupToolbar(toolbarElement as HTMLElement),
-    ],
-  });
   const view = new EditorView(contentElement, {
     state,
     dispatchTransaction(transaction: Transaction) {
@@ -69,5 +94,5 @@ export function mount(src: string | HTMLElement, content?: string): Editor {
       view.updateState(newState);
     },
   });
-  return new Editor(view, schema, contentElement);
+  return new Editor(view, editorSchema, plugins, contentElement);
 }
