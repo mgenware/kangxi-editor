@@ -37,7 +37,7 @@
         if (!window.kangxi) {
           console.error('kangxi not installed');
         } else {
-          window.editor = window.kangxi.mount(document.getElementById('editor'), `<h2>Sample document</h2>
+          window.editor = window.kangxi.Editor.create(document.getElementById('editor'), `<h2>Sample document</h2>
 <p>This is a sample document, thanks for using <code>kangxi</code></p>`);
         }
       });

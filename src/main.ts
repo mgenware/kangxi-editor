@@ -30,6 +30,50 @@ function createState(
 }
 
 export class Editor {
+  static create(src: string | HTMLElement, content?: string): Editor {
+    throwIfEmpty(src, 'src');
+    let editorElement: HTMLElement;
+    if (typeof src === 'string') {
+      editorElement = document.querySelector(src) as HTMLElement;
+      if (!editorElement) {
+        throw new Error(`The selector "${src}" does not match anything`);
+      }
+    } else {
+      editorElement = src as HTMLElement;
+    }
+    content = content || '';
+    const toolbarElement = editorElement.querySelector(
+      '.kx-toolbar',
+    ) as HTMLElement;
+    const contentElement = editorElement.querySelector(
+      '.kx-content',
+    ) as HTMLElement;
+
+    if (!toolbarElement) {
+      throw new Error(`ToolBar element not found`);
+    }
+    if (!contentElement) {
+      throw new Error(`Content element not found`);
+    }
+
+    const plugins: Plugin[] = [
+      history(),
+      keymap(buildKeymap(editorSchema, null)),
+      keymap(baseKeymap),
+      setupToolbar(toolbarElement as HTMLElement),
+    ];
+    const state = createState(content, editorSchema, plugins);
+
+    const view = new EditorView(contentElement, {
+      state,
+      dispatchTransaction(transaction: Transaction) {
+        const newState = view.state.apply(transaction);
+        view.updateState(newState);
+      },
+    });
+    return new Editor(view, editorSchema, plugins, contentElement);
+  }
+
   constructor(
     public core: EditorView,
     public schema: Schema,
@@ -53,46 +97,4 @@ export class Editor {
   }
 }
 
-export function mount(src: string | HTMLElement, content?: string): Editor {
-  throwIfEmpty(src, 'src');
-  let editorElement: HTMLElement;
-  if (typeof src === 'string') {
-    editorElement = document.querySelector(src) as HTMLElement;
-    if (!editorElement) {
-      throw new Error(`The selector "${src}" does not match anything`);
-    }
-  } else {
-    editorElement = src as HTMLElement;
-  }
-  content = content || '';
-  const toolbarElement = editorElement.querySelector(
-    '.kx-toolbar',
-  ) as HTMLElement;
-  const contentElement = editorElement.querySelector(
-    '.kx-content',
-  ) as HTMLElement;
-
-  if (!toolbarElement) {
-    throw new Error(`ToolBar element not found`);
-  }
-  if (!contentElement) {
-    throw new Error(`Content element not found`);
-  }
-
-  const plugins: Plugin[] = [
-    history(),
-    keymap(buildKeymap(editorSchema, null)),
-    keymap(baseKeymap),
-    setupToolbar(toolbarElement as HTMLElement),
-  ];
-  const state = createState(content, editorSchema, plugins);
-
-  const view = new EditorView(contentElement, {
-    state,
-    dispatchTransaction(transaction: Transaction) {
-      const newState = view.state.apply(transaction);
-      view.updateState(newState);
-    },
-  });
-  return new Editor(view, editorSchema, plugins, contentElement);
-}
+export default Editor;
