@@ -1,38 +1,48 @@
+// Modified from https://github.com/ProseMirror/prosemirror-menu
 import ToolBarItem from './toolbarItem';
 import { EditorView } from 'prosemirror-view';
 
 export default class ToolBarView {
   items: ToolBarItem[];
+  element: HTMLElement;
 
-  constructor(
-    public container: HTMLElement,
-    userItems: ToolBarItem[],
-    public editorView: EditorView,
-  ) {
+  constructor(userItems: ToolBarItem[], public editorView: EditorView) {
+    const element = document.createElement('div');
+    element.className = 'kx-toolbar';
     const items: ToolBarItem[] = [];
     for (const child of userItems) {
       if (child.cmd) {
         items.push(child);
       }
-      container.appendChild(child.element);
+      element.appendChild(child.element);
     }
     this.items = items;
 
     this.update();
     for (const child of this.items) {
-      child.element.addEventListener('mouseup', e => {
-        e.preventDefault();
-        editorView.focus();
-        // Some commands may need the third param, the editor view
-        child.cmd(editorView.state, editorView.dispatch, editorView);
-      });
+      if (!child.registered) {
+        child.element.addEventListener('mouseup', e => {
+          e.preventDefault();
+          editorView.focus();
+          // Some commands may need the third param, the editor view
+          child.cmd(editorView.state, editorView.dispatch, editorView);
+        });
+        child.registered = true;
+      }
     }
-    this.container = container;
+    if (editorView.dom.parentElement) {
+      editorView.dom.parentElement.prepend(element);
+    }
+    this.element = element;
   }
 
   update() {
     for (const child of this.items) {
       child.update(this.editorView.state);
     }
+  }
+
+  destroy() {
+    this.element.remove();
   }
 }

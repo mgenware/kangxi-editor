@@ -30,52 +30,30 @@ function createState(
 }
 
 export class Editor {
-  static create(src: string | HTMLElement, content?: string): Editor {
-    throwIfEmpty(src, 'src');
-    let editorElement: HTMLElement;
-    if (typeof src === 'string') {
-      editorElement = document.querySelector(src) as HTMLElement;
-      if (!editorElement) {
-        throw new Error(`The selector "${src}" does not match anything`);
-      }
-    } else {
-      editorElement = src as HTMLElement;
-    }
+  static create(element: HTMLElement, content?: string): Editor {
+    throwIfEmpty(element, 'element');
     content = content || '';
-    const toolbarElement = editorElement.querySelector(
-      '.kx-toolbar',
-    ) as HTMLElement;
-    const contentElement = editorElement.querySelector(
-      '.kx-content',
-    ) as HTMLElement;
-
-    if (!toolbarElement) {
-      throw new Error(`ToolBar element not found`);
-    }
-    if (!contentElement) {
-      throw new Error(`Content element not found`);
-    }
 
     const plugins: Plugin[] = [
       history(),
       keymap(buildKeymap(editorSchema, null)),
       keymap(baseKeymap),
-      setupToolbar(toolbarElement as HTMLElement),
+      setupToolbar(),
     ];
     const state = createState(content, editorSchema, plugins);
 
-    const view = new EditorView(contentElement, {
+    const view = new EditorView(element, {
       state,
       dispatchTransaction(transaction: Transaction) {
         const newState = view.state.apply(transaction);
         view.updateState(newState);
       },
     });
-    return new Editor(view, editorSchema, plugins, contentElement);
+    return new Editor(view, editorSchema, plugins, element);
   }
 
   constructor(
-    public core: EditorView,
+    public view: EditorView,
     public schema: Schema,
     public plugins: Plugin[],
     public contentElement: HTMLElement,
@@ -91,9 +69,9 @@ export class Editor {
 
   setHtmlContent(html: string) {
     html = html || '';
-    // DO NOT reuse `editorView.state`, `editorView.state.plugins` is always empty.
+    // DO NOT reuse `editorView.state`, `editorView.state.plugins` is always empty. Use createState to start a new state.
     const state = createState(html, this.schema, this.plugins);
-    this.core.updateState(state);
+    this.view.updateState(state);
   }
 }
 

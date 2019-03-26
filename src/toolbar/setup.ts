@@ -1,3 +1,4 @@
+// Modified from https://github.com/ProseMirror/prosemirror-menu
 import { toggleMark, setBlockType, wrapIn, lift } from 'prosemirror-commands';
 import { undo, redo } from 'prosemirror-history';
 import { schema } from '../schema/schema';
@@ -44,8 +45,8 @@ function separator() {
   return new ToolBarItem(element);
 }
 
-export default function setup(element: HTMLElement): Plugin {
-  return toolbarPlugin(element, [
+export default function setup(): Plugin {
+  return toolbarPlugin([
     heading(1),
     heading(2),
     heading(3),

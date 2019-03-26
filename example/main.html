@@ -11,20 +11,17 @@
     />
     <link rel="stylesheet" href="../dist/editor.css" />
     <style>
-    #editor {
-      padding: 0.5rem;
-      border: 1px solid #eee;
-    }
+      #editor {
+        padding: 0.5rem;
+        border: 1px solid #eee;
+      }
     </style>
   </head>
 
   <body>
     <section class="section">
       <div class="content">
-        <div id="editor" class="kx-editor">
-          <div class="kx-toolbar"></div>
-          <div class="kx-content"></div>
-        </div>
+        <div id="editor" class="kx-editor"></div>
       </div>
       <button class="button" onclick="outputHtml()">Get content</button>
       <button class="button" onclick="setHtml()">Set content</button>
@@ -37,8 +34,11 @@
         if (!window.kangxi) {
           console.error('kangxi not installed');
         } else {
-          window.editor = window.kangxi.Editor.create(document.getElementById('editor'), `<h2>Sample document</h2>
-<p>This is a sample document, thanks for using <code>kangxi</code></p>`);
+          window.editor = window.kangxi.Editor.create(
+            document.getElementById('editor'),
+            `<h2>Sample document</h2>
+<p>This is a sample document, thanks for using <code>kangxi</code></p>`,
+          );
         }
       });
 
@@ -46,7 +46,9 @@
         if (!window.editor) {
           console.error('Editor not created');
         } else {
-          document.getElementById('htmlOutput').textContent = window.editor.htmlContent();
+          document.getElementById(
+            'htmlOutput',
+          ).textContent = window.editor.htmlContent();
         }
       }
 
