@@ -2,6 +2,10 @@
 
 Another WYSIWYG editor
 
+### Demo
+
+https://coldfunction.com/dds/dev/kangxi/main.html
+
 ## Installation
 
 ```sh
@@ -24,10 +28,7 @@ For browser:
   <link rel="stylesheet" href="./dist/editor.css" />
 </head>
 <body>
-  <div id="editor" class="kx-editor">
-    <div class="kx-toolbar"></div>
-    <div class="kx-content"></div>
-  </div>
+  <div id="editor" class="kx-editor"></div>
   <script src="./dist/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
