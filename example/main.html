@@ -26,7 +26,7 @@
       <button class="button" onclick="outputHtml()">Get content</button>
       <button class="button" onclick="setHtml()">Set content</button>
       <hr />
-      <pre><code id="htmlOutput"></code></pre>
+      <p><code id="htmlOutput"></code></p>
     </section>
     <script src="../dist/main.js"></script>
     <script>
@@ -48,7 +48,7 @@
         } else {
           document.getElementById(
             'htmlOutput',
-          ).textContent = window.editor.htmlContent();
+          ).textContent = window.editor.contentHTML;
         }
       }
 
@@ -56,7 +56,7 @@
         if (!window.editor) {
           console.error('Editor not created');
         } else {
-          window.editor.setHtmlContent(`<p>New <b>document</b></p>`);
+          window.editor.contentHTML = `<p>New <b>document</b></p>`;
         }
       }
     </script>

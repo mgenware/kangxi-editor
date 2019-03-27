@@ -50,6 +50,8 @@ For browser:
 
 ```js
 class Editor {
+  // Gets or sets the inner HTML of the editor.
+  contentHTML: string;
   // The underlying ProseMirror editor view.
   view: EditorView;
   // The underlying ProseMirror document schema.
@@ -57,12 +59,16 @@ class Editor {
   // The underlying ProseMirror plugin array mounted.
   plugins: Plugin[];
   // The HTML element where editor is mounted.
+  rootElement: HTMLElement;
+  // The HTML element where editor toolbar is mounted.
+  toolbarElement: HTMLElement;
+  // The HTML element where editor content area is mounted.
   contentElement: HTMLElement;
 
   // Creates an editor.
   //  * `src`: HTML element or a query selector to mount the editor.
   //  * `content`: Optional initial HTML content.
-  static create(src: string | HTMLElement, content?: string): Editor;
+  static create(src: string | HTMLElement, contentHTML?: string): Editor;
 
   // Returns the HTML content of the current editor.
   htmlContent(): string;

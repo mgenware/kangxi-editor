@@ -9,6 +9,7 @@ import setupToolbar from './toolbar/setup';
 import { throwIfEmpty } from 'throw-if-arg-empty';
 import './style.css';
 import { buildKeymap } from './keys/keymap';
+import { ToolBarClass } from './defs';
 
 function createDoc(html: string, schema: Schema): ProsemirrorNode {
   const srcElement = document.createElement('div') as HTMLElement;
@@ -30,9 +31,9 @@ function createState(
 }
 
 export class Editor {
-  static create(element: HTMLElement, content?: string): Editor {
+  static create(element: HTMLElement, contentHTML?: string): Editor {
     throwIfEmpty(element, 'element');
-    content = content || '';
+    contentHTML = contentHTML || '';
 
     const plugins: Plugin[] = [
       history(),
@@ -40,7 +41,7 @@ export class Editor {
       keymap(baseKeymap),
       setupToolbar(),
     ];
-    const state = createState(content, editorSchema, plugins);
+    const state = createState(contentHTML, editorSchema, plugins);
 
     const view = new EditorView(element, {
       state,
@@ -52,22 +53,28 @@ export class Editor {
     return new Editor(view, editorSchema, plugins, element);
   }
 
+  toolbarElement: HTMLElement;
+  contentElement: HTMLElement;
+
   constructor(
     public view: EditorView,
     public schema: Schema,
     public plugins: Plugin[],
-    public contentElement: HTMLElement,
-  ) {}
-
-  htmlContent(): string {
-    const node = this.contentElement.firstElementChild;
-    if (!node) {
-      return '';
-    }
-    return node.innerHTML;
+    public rootElement: HTMLElement,
+  ) {
+    this.toolbarElement = rootElement.querySelector(
+      '.' + ToolBarClass,
+    ) as HTMLElement;
+    this.contentElement = rootElement.querySelector(
+      '.ProseMirror',
+    ) as HTMLElement;
   }
 
-  setHtmlContent(html: string) {
+  get contentHTML(): string {
+    return this.contentElement.innerHTML;
+  }
+
+  set contentHTML(html: string) {
     html = html || '';
     // DO NOT reuse `editorView.state`, `editorView.state.plugins` is always empty. Use createState to start a new state.
     const state = createState(html, this.schema, this.plugins);
