@@ -5,6 +5,7 @@ import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import { terser } from 'rollup-plugin-terser';
 import json from 'rollup-plugin-json';
+const langs = require('./postbuild/langs');
 
 const isProd = process.env.NODE_ENV == 'production';
 
@@ -48,7 +49,6 @@ const tasks = [
   },
 ];
 
-const langs = ['en', 'cs'];
 for (const lang of langs) {
   const task = {
     input: `src/langs/${lang}.json`,
