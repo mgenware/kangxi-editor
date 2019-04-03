@@ -28,6 +28,7 @@
       <hr />
       <p><code id="htmlOutput"></code></p>
     </section>
+    <script src="../dist/langs/en.js"></script>
     <script src="../dist/main.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -36,8 +37,11 @@
         } else {
           window.editor = window.kangxi.Editor.create(
             document.getElementById('editor'),
-            `<h2>Sample document</h2>
+            {
+              contentHTML: `<h2>Sample document</h2>
 <p>This is a sample document, thanks for using <code>kangxi</code></p>`,
+              lang: window.kangxi_lang_en,
+            },
           );
         }
       });
@@ -46,9 +50,8 @@
         if (!window.editor) {
           console.error('Editor not created');
         } else {
-          document.getElementById(
-            'htmlOutput',
-          ).textContent = window.editor.contentHTML;
+          document.getElementById('htmlOutput').textContent =
+            window.editor.contentHTML;
         }
       }
 

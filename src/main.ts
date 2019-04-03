@@ -7,7 +7,6 @@ import { EditorView } from 'prosemirror-view';
 import { history } from 'prosemirror-history';
 import setupToolbar from './toolbar/setup';
 import { throwIfEmpty } from 'throw-if-arg-empty';
-import './style.css';
 import { buildKeymap } from './keys/keymap';
 import { ToolBarClass } from './defs';
 import Option from './option';
