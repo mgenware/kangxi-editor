@@ -10,6 +10,7 @@ import { throwIfEmpty } from 'throw-if-arg-empty';
 import './style.css';
 import { buildKeymap } from './keys/keymap';
 import { ToolBarClass } from './defs';
+import Option from './option';
 
 function createDoc(html: string, schema: Schema): ProsemirrorNode {
   const srcElement = document.createElement('div') as HTMLElement;
@@ -31,17 +32,17 @@ function createState(
 }
 
 export class Editor {
-  static create(element: HTMLElement, contentHTML?: string): Editor {
+  static create(element: HTMLElement, opt?: Option): Editor {
     throwIfEmpty(element, 'element');
-    contentHTML = contentHTML || '';
+    opt = opt || {};
 
     const plugins: Plugin[] = [
       history(),
       keymap(buildKeymap(editorSchema, null)),
       keymap(baseKeymap),
-      setupToolbar(),
+      setupToolbar(opt.lang || {}),
     ];
-    const state = createState(contentHTML, editorSchema, plugins);
+    const state = createState(opt.contentHTML || '', editorSchema, plugins);
 
     const view = new EditorView(element, {
       state,

@@ -45,7 +45,7 @@ function separator() {
   return new ToolBarItem(element);
 }
 
-export default function setup(): Plugin {
+export default function setup(lang: { [key: string]: string }): Plugin {
   return toolbarPlugin([
     heading(1),
     heading(2),
@@ -56,42 +56,45 @@ export default function setup(): Plugin {
     ),
     separator(),
     new ToolBarMarkerItem(
-      iconBtn('Bold', icons.bold),
+      iconBtn(lang.bold, icons.bold),
       toggleMark(schema.marks.strong),
       schema.marks.strong,
     ),
     new ToolBarMarkerItem(
-      iconBtn('Italic', icons.italic),
+      iconBtn(lang.italic, icons.italic),
       toggleMark(schema.marks.em),
       schema.marks.em,
     ),
     new ToolBarMarkerItem(
-      iconBtn('Underline', icons.underline),
+      iconBtn(lang.underline, icons.underline),
       toggleMark(schema.marks.underline),
       schema.marks.underline,
     ),
     new ToolBarMarkerItem(
-      iconBtn('Strikethrough', icons.strikethrough),
+      iconBtn(lang.strikethrough, icons.strikethrough),
       toggleMark(schema.marks.strikethrough),
       schema.marks.strikethrough,
     ),
     separator(),
     new ToolBarItem(
-      iconBtn('Numbered list', icons.orderedList),
+      iconBtn(lang.numberedList, icons.orderedList),
       wrapInList(schema.nodes.ordered_list),
     ),
     new ToolBarItem(
-      iconBtn('Bullet list', icons.orderedList),
+      iconBtn(lang.bulletList, icons.orderedList),
       wrapInList(schema.nodes.bullet_list),
     ),
     new ToolBarItem(
-      iconBtn('Blockquote', icons.quotes),
+      iconBtn(lang.blockquote, icons.quotes),
       wrapIn(schema.nodes.blockquote),
     ),
-    new ToolBarItem(iconBtn('Decrease indent', icons.indentDecrease), lift),
-    new ToolBarItem(iconBtn('Code', icons.code), toggleMark(schema.marks.code)),
+    new ToolBarItem(iconBtn(lang.decreaseIndent, icons.indentDecrease), lift),
+    new ToolBarItem(
+      iconBtn(lang.code, icons.code),
+      toggleMark(schema.marks.code),
+    ),
     separator(),
-    new ToolBarItem(iconBtn('Undo', icons.undo), undo),
-    new ToolBarItem(iconBtn('Redo', icons.redo), redo),
+    new ToolBarItem(iconBtn(lang.undo, icons.undo), undo),
+    new ToolBarItem(iconBtn(lang.redo, icons.redo), redo),
   ]);
 }
