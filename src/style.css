@@ -19,8 +19,7 @@
 .kx-toolbar button {
   display: inline-flex;
   padding: 0.2rem;
-  margin-bottom: 0.5rem;
-  margin: 0;
+  margin: 0 1px;
   border-radius: 0.15em;
   text-decoration: none;
   text-align: center;
@@ -29,11 +28,11 @@
   cursor: pointer;
   border-color: transparent;
   filter: brightness(100%);
-  transition: all 1s ease;
+  transition: all 0.3s ease;
 }
 
 .kx-toolbar button:hover:not(.is-disabled) {
-  filter: brightness(70%);
+  filter: brightness(80%);
 }
 
 .kx-toolbar button.is-disabled {
@@ -42,7 +41,7 @@
 }
 
 .kx-toolbar button.is-active {
-  filter: brightness(70%);
+  filter: brightness(80%);
 }
 
 /* For textual buttons */
