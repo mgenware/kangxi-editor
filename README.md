@@ -67,7 +67,7 @@ For browsers:
 </body>
 ```
 
-### API
+## API
 
 ```js
 class Editor {
@@ -90,11 +90,6 @@ class Editor {
   //  * `src`: HTML element or a query selector to mount the editor.
   //  * `opt`: Options [see details below]
   static create(src: string | HTMLElement, opt?: Option): Editor;
-
-  // Returns the HTML content of the current editor.
-  htmlContent(): string;
-  // Sets the HTML content of the current editor.
-  setHtmlContent(html: string): void;
 }
 
 // Options
@@ -104,4 +99,10 @@ interface Option {
   // Translation data.
   lang?: { [key: string]: string };
 }
+```
+
+### Builtin Languages
+```js
+'kangxi-editor/dist/langs/en' // English
+'kangxi-editor/dist/langs/cs' // Chinese Simplified
 ```
