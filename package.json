@@ -20,7 +20,8 @@
     "compile": "tsc",
     "dev": "yarn run clean && cross-env NODE_ENV=development rollup -c -w",
     "lint": "tslint --project tsconfig.json --config tslint.json",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "test": "yarn build"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -64,14 +65,14 @@
     "autoprefixer": "^9.5.0",
     "cross-env": "^5.2.0",
     "rimraf": "^2.6.3",
-    "rollup": "^1.7.0",
-    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup": "^1.8.0",
+    "rollup-plugin-commonjs": "^9.3.0",
     "rollup-plugin-node-resolve": "^4.0.1",
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-typescript2": "^0.20.1",
-    "tslint": "^5.14.0",
-    "typescript": "^3.3.4000",
+    "tslint": "^5.15.0",
+    "typescript": "^3.4.1",
     "unique-temp-dir": "^1.0.0"
   }
 }
