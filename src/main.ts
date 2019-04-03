@@ -82,5 +82,4 @@ export class Editor {
   }
 }
 
-const lang: { [key: string]: string } = { asdf: 'sdfsdf' };
-export default lang;
+export default Editor;
