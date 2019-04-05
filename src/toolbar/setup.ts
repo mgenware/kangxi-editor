@@ -3,7 +3,7 @@ import { toggleMark, setBlockType, wrapIn, lift } from 'prosemirror-commands';
 import { undo, redo } from 'prosemirror-history';
 import { schema } from '../schema/schema';
 import toolbarPlugin from './toolbarPlugin';
-import { Plugin, EditorState, Transaction } from 'prosemirror-state';
+import { Plugin, EditorState } from 'prosemirror-state';
 import icons from './icons';
 import ToolBarItem from './toolbarItem';
 import ToolBarMarkerItem from './toolbarMarkerItem';
@@ -54,7 +54,7 @@ function heading(level: number) {
 function separator() {
   const element = document.createElement('span');
   element.className = 'separator';
-  return new ToolBarItem(element);
+  return new ToolBarItem(element, null);
 }
 
 export default function setup(lang: { [key: string]: string }): Plugin {
@@ -104,8 +104,12 @@ export default function setup(lang: { [key: string]: string }): Plugin {
     new ToolBarItem(iconBtn(lang.decreaseIndent, icons.indentDecrease), lift),
     new ToolBarItem(
       iconBtn(lang.horizontalRule, icons.horizontalLine),
-      (state: EditorState, dispatch: (tr: Transaction) => void) =>
-        dispatch(state.tr.replaceSelectionWith(nodes.horizontal_rule.create())),
+      (state, dispatch) => {
+        dispatch!(
+          state.tr.replaceSelectionWith(nodes.horizontal_rule.create()),
+        );
+        return true;
+      },
       state => canInsert(state, nodes.horizontal_rule),
     ),
     new ToolBarItem(iconBtn(lang.code, icons.code), toggleMark(marks.code)),

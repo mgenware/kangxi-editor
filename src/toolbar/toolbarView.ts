@@ -25,8 +25,10 @@ export default class ToolBarView {
         child.element.addEventListener('mouseup', e => {
           e.preventDefault();
           editorView.focus();
-          // Some commands may need the third param, the editor view
-          child.cmd(editorView.state, editorView.dispatch, editorView);
+          if (child.cmd) {
+            // Some commands may need the third param, the editor view
+            child.cmd(editorView.state, editorView.dispatch, editorView);
+          }
         });
         child.registered = true;
       }

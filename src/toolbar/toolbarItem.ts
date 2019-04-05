@@ -1,5 +1,12 @@
 // Modified from https://github.com/ProseMirror/prosemirror-menu
-import { EditorState } from 'prosemirror-state';
+import { EditorState, Transaction } from 'prosemirror-state';
+import { EditorView } from 'prosemirror-view';
+
+export type CommandFunc = (
+  state: EditorState,
+  dispatch?: (tr: Transaction) => void,
+  editorView?: EditorView,
+) => boolean;
 
 export default class ToolBarItem {
   // Plugins are reloaded on state changes, but events are not re-registered.
@@ -7,12 +14,17 @@ export default class ToolBarItem {
   registered = false;
   constructor(
     public element: HTMLElement,
-    public cmd?: any,
-    public isActive?: (state: EditorState) => boolean,
+    // cmd can be null, for non clickable items, i.e. separators
+    public cmd: CommandFunc | null,
+    public isActive?: CommandFunc,
   ) {}
 
   update(state: EditorState) {
-    const active = (this.isActive || this.cmd)(state);
+    const checker = this.isActive || this.cmd;
+    if (!checker) {
+      return;
+    }
+    const active = checker(state);
     const { element } = this;
     if (active) {
       element.classList.remove('is-disabled');
