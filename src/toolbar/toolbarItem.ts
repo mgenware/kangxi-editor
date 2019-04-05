@@ -5,10 +5,14 @@ export default class ToolBarItem {
   // Plugins are reloaded on state changes, but events are not re-registered.
   // This property indicates events are already registered.
   registered = false;
-  constructor(public element: HTMLElement, public cmd?: any) {}
+  constructor(
+    public element: HTMLElement,
+    public cmd?: any,
+    public isActive?: (state: EditorState) => boolean,
+  ) {}
 
   update(state: EditorState) {
-    const active = this.cmd(state);
+    const active = (this.isActive || this.cmd)(state);
     const { element } = this;
     if (active) {
       element.classList.remove('is-disabled');

@@ -3,11 +3,12 @@ import { toggleMark, setBlockType, wrapIn, lift } from 'prosemirror-commands';
 import { undo, redo } from 'prosemirror-history';
 import { schema } from '../schema/schema';
 import toolbarPlugin from './toolbarPlugin';
-import { Plugin } from 'prosemirror-state';
+import { Plugin, EditorState, Transaction } from 'prosemirror-state';
 import icons from './icons';
 import ToolBarItem from './toolbarItem';
 import ToolBarMarkerItem from './toolbarMarkerItem';
 import { wrapInList } from 'prosemirror-schema-list';
+import { NodeType } from 'prosemirror-model';
 
 const IMG_WIDTH = 18;
 
@@ -31,6 +32,17 @@ function iconBtn(title: string, svg: string) {
   return makeBtn(title, img);
 }
 
+function canInsert(state: EditorState, nodeType: NodeType) {
+  const $from = state.selection.$from;
+  for (let d = $from.depth; d >= 0; d--) {
+    const index = $from.index(d);
+    if ($from.node(d).canReplaceWith(index, index, nodeType)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 // Create an icon for a heading at the given level
 function heading(level: number) {
   return new ToolBarItem(
@@ -46,53 +58,57 @@ function separator() {
 }
 
 export default function setup(lang: { [key: string]: string }): Plugin {
+  const { nodes, marks } = schema;
   return toolbarPlugin([
     heading(1),
     heading(2),
     heading(3),
     new ToolBarItem(
       iconBtn('Normal text', icons.text),
-      setBlockType(schema.nodes.paragraph),
+      setBlockType(nodes.paragraph),
     ),
     separator(),
     new ToolBarMarkerItem(
       iconBtn(lang.bold, icons.bold),
-      toggleMark(schema.marks.strong),
-      schema.marks.strong,
+      toggleMark(marks.strong),
+      marks.strong,
     ),
     new ToolBarMarkerItem(
       iconBtn(lang.italic, icons.italic),
-      toggleMark(schema.marks.em),
-      schema.marks.em,
+      toggleMark(marks.em),
+      marks.em,
     ),
     new ToolBarMarkerItem(
       iconBtn(lang.underline, icons.underline),
-      toggleMark(schema.marks.underline),
-      schema.marks.underline,
+      toggleMark(marks.underline),
+      marks.underline,
     ),
     new ToolBarMarkerItem(
       iconBtn(lang.strikethrough, icons.strikethrough),
-      toggleMark(schema.marks.strikethrough),
-      schema.marks.strikethrough,
+      toggleMark(marks.strikethrough),
+      marks.strikethrough,
     ),
     separator(),
     new ToolBarItem(
       iconBtn(lang.numberedList, icons.orderedList),
-      wrapInList(schema.nodes.ordered_list),
+      wrapInList(nodes.ordered_list),
     ),
     new ToolBarItem(
       iconBtn(lang.bulletList, icons.orderedList),
-      wrapInList(schema.nodes.bullet_list),
+      wrapInList(nodes.bullet_list),
     ),
     new ToolBarItem(
       iconBtn(lang.blockquote, icons.quotes),
-      wrapIn(schema.nodes.blockquote),
+      wrapIn(nodes.blockquote),
     ),
     new ToolBarItem(iconBtn(lang.decreaseIndent, icons.indentDecrease), lift),
     new ToolBarItem(
-      iconBtn(lang.code, icons.code),
-      toggleMark(schema.marks.code),
+      iconBtn(lang.horizontalRule, icons.horizontalLine),
+      (state: EditorState, dispatch: (tr: Transaction) => void) =>
+        dispatch(state.tr.replaceSelectionWith(nodes.horizontal_rule.create())),
+      state => canInsert(state, nodes.horizontal_rule),
     ),
+    new ToolBarItem(iconBtn(lang.code, icons.code), toggleMark(marks.code)),
     separator(),
     new ToolBarItem(iconBtn(lang.undo, icons.undo), undo),
     new ToolBarItem(iconBtn(lang.redo, icons.redo), redo),
