@@ -9,6 +9,10 @@
   overflow-y: scroll;
 }
 
+.kx-editor .ProseMirror:focus {
+  outline: none;
+}
+
 .kx-toolbar {
   display: flex;
   padding-bottom: 0.2rem;
