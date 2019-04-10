@@ -27,7 +27,7 @@ import 'kangxi-editor/dist/editor.css';
 // Translation data
 import EditorLang from 'kangxi-editor/dist/langs/en';
 
-const editor = KXEditor.create(this.editorElement, {
+const editor = KXEditor.create(document.getElementById('editor'), {
   contentHTML: '<p>Hello World</p>',
   lang: EditorLang,
 });
