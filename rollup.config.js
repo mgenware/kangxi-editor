@@ -11,7 +11,6 @@ const isProd = process.env.NODE_ENV == 'production';
 
 const tsPlugins = [
   resolve({
-    module: true,
     browser: true,
   }),
   commonjs(),
@@ -30,6 +29,7 @@ const tasks = [
       file: 'dist/main.js',
       format: 'umd',
       exports: 'named',
+      sourcemap: true,
     },
     plugins: tsPlugins,
   },
