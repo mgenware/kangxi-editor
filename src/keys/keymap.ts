@@ -18,8 +18,6 @@ import { undo, redo } from 'prosemirror-history';
 import { undoInputRule } from 'prosemirror-inputrules';
 import { Schema } from 'prosemirror-model';
 
-const mac = navigator ? /Mac/.test(navigator.platform) : false;
-
 // :: (Schema, ?Object) → Object
 // Inspect the given schema looking for marks and nodes from the
 // basic schema, and if found, add key bindings related to them.
@@ -86,11 +84,7 @@ export function buildKeymap(schema: Schema, mapKeys: any) {
       }
       return true;
     });
-    bind('Mod-Enter', cmd);
     bind('Shift-Enter', cmd);
-    if (mac) {
-      bind('Ctrl-Enter', cmd);
-    }
   }
 
   bind('Enter', splitListItem(schema.nodes.list_item));
