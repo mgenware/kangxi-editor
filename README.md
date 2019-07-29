@@ -27,7 +27,7 @@ import 'kangxi-editor/dist/editor.css';
 // Translation data
 import EditorLang from 'kangxi-editor/dist/langs/en';
 
-const editor = KXEditor.create(document.getElementById('editor'), {
+const editor = Editor.create(document.getElementById('editor'), {
   contentHTML: '<p>Hello World</p>',
   lang: EditorLang,
 });
@@ -54,12 +54,12 @@ For browsers:
       } else {
         // Use `window.kangxi.Editor` to access the `Editor` type in browser build
         window.editor = window.kangxi.Editor.create(
-            document.getElementById('editor'),
-            {
-              contentHTML: `<p>Hello World</p>`,
-              // Use `window.kangxi_lang_<name>` to access the language type in browser build
-              lang: window.kangxi_lang_en,
-            },
+          document.getElementById('editor'),
+          {
+            contentHTML: `<p>Hello World</p>`,
+            // Use `window.kangxi_lang_<name>` to access the language type in browser build
+            lang: window.kangxi_lang_en,
+          },
         );
       }
     });
@@ -102,7 +102,8 @@ interface Option {
 ```
 
 ### Builtin Languages
+
 ```js
-'kangxi-editor/dist/langs/en' // English
-'kangxi-editor/dist/langs/cs' // Chinese Simplified
+'kangxi-editor/dist/langs/en'; // English
+'kangxi-editor/dist/langs/cs'; // Chinese Simplified
 ```
