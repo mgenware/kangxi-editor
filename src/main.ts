@@ -71,7 +71,12 @@ export class Editor {
   }
 
   get contentHTML(): string {
-    return this.contentElement.innerHTML;
+    const html = this.contentElement.innerHTML;
+    // Treat empty content as empty string
+    if (html === '<p><br></p>') {
+      return '';
+    }
+    return html;
   }
 
   set contentHTML(html: string) {
