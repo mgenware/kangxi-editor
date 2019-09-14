@@ -38,7 +38,12 @@
   border-color: transparent;
   filter: brightness(100%);
   transition: all 0.3s ease;
-  background-color: var(--kx-toolbar-button-back-color, transparent);
+  color: var(--kx-toolbar-button-color, black);
+  background-color: transparent;
+}
+
+.kx-toolbar button svg {
+  fill: var(--kx-toolbar-button-color, black);
 }
 
 .kx-toolbar button:hover:not(.is-disabled) {
@@ -46,7 +51,7 @@
 }
 
 .kx-toolbar button.is-disabled {
-  opacity: 0.4;
+  opacity: 0.5;
   pointer-events: none;
 }
 
