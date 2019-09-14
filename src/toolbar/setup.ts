@@ -26,10 +26,12 @@ function textBtn(title: string, text: string) {
 }
 
 function iconBtn(title: string, svg: string) {
-  const img = document.createElement('img');
-  img.src = `data:image/svg+xml;base64,${btoa(svg)}`;
-  img.width = img.height = IMG_WIDTH;
-  return makeBtn(title, img);
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(svg, 'image/svg+xml');
+  const element = doc.documentElement;
+  element.setAttribute('width', IMG_WIDTH.toString());
+  element.setAttribute('height', IMG_WIDTH.toString());
+  return makeBtn(title, element);
 }
 
 function canInsert(state: EditorState, nodeType: NodeType) {
