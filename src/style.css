@@ -21,7 +21,7 @@
 .kx-toolbar {
   display: flex;
   padding-bottom: 0.2rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--kx-toolbar-separator-color, #ddd);
   margin-bottom: 0.2rem;
 }
 
