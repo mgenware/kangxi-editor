@@ -27,6 +27,11 @@
   "engines": {
     "node": ">=8.0.0"
   },
+  "files": [
+    "/dist/**/*.js",
+    "/dist/**/*.ts",
+    "/dist/**/*.map"
+  ],
   "dependencies": {
     "prosemirror-commands": "^1.0.0",
     "prosemirror-dropcursor": "^1.0.0",
