@@ -2,6 +2,7 @@
 import ToolBarItem from './toolbarItem';
 import { EditorState } from 'prosemirror-state';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function markActive(state: EditorState, type: any) {
   const { from, $from, to, empty } = state.selection;
   if (empty) {
@@ -11,6 +12,7 @@ function markActive(state: EditorState, type: any) {
 }
 
 export default class ToolbarMarkerItem extends ToolBarItem {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(element: HTMLElement, cmd: any, public markType: any) {
     super(element, cmd);
   }

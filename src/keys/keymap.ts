@@ -46,8 +46,11 @@ import { Schema } from 'prosemirror-model';
 // You can suppress or map these bindings by passing a `mapKeys`
 // argument, which maps key names (say `"Mod-B"` to either `false`, to
 // remove the binding, or a new key name string.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function buildKeymap(schema: Schema, mapKeys: any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const keys: { [key: string]: any } = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function bind(key: string, cmd: any) {
     if (mapKeys) {
       const mapped = mapKeys[key];

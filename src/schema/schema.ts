@@ -9,6 +9,7 @@ const schema0 = new Schema({
 });
 
 export const schema = new Schema({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   nodes: addListNodes(schema0.spec.nodes as any, 'paragraph block*', 'block'),
   marks: schema0.spec.marks,
 });

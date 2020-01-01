@@ -107,9 +107,10 @@ export default function setup(lang: { [key: string]: string }): Plugin {
     new ToolBarItem(
       iconBtn(lang.horizontalRule, icons.horizontalLine),
       (state, dispatch) => {
-        dispatch!(
-          state.tr.replaceSelectionWith(nodes.horizontal_rule.create()),
-        );
+        if (!dispatch) {
+          throw new Error('Unexpected null `dispatch` argument');
+        }
+        dispatch(state.tr.replaceSelectionWith(nodes.horizontal_rule.create()));
         return true;
       },
       state => canInsert(state, nodes.horizontal_rule),

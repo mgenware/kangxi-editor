@@ -6,7 +6,6 @@ import ToolBarView from './toolbarView';
 
 export default function toolbarPlugin(items: ToolBarItem[]) {
   return new Plugin({
-    // @ts-ignore
     view(editorView: EditorView) {
       const toolbar = new ToolBarView(items, editorView);
       return toolbar;
