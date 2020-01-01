@@ -101,7 +101,16 @@ interface Option {
 }
 ```
 
-### Builtin Languages
+### CSS Variables
+
+```
+--kx-back-color
+--kx-text-color
+--kx-toolbar-separator-color
+--kx-toolbar-button-color
+```
+
+### Built-in Languages
 
 ```js
 'kangxi-editor/dist/langs/en'; // English
