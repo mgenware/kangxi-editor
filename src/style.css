@@ -39,7 +39,7 @@
   filter: brightness(100%);
   transition: all 0.3s ease;
   color: var(--kx-toolbar-button-color, black);
-  background-color: transparent;
+  background-color: var(--kx-back-color, white);
 }
 
 .kx-toolbar button svg {
