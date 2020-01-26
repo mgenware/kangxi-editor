@@ -44,7 +44,7 @@
         if (!window.kangxi) {
           console.error('kangxi not installed');
         } else {
-          window.editor = window.kangxi.Editor.create(
+          window.editor = new window.kangxi.Editor(
             document.getElementById('editor'),
             {
               contentHTML: `<h2>kangxi-editor</h2><hr/>
@@ -52,6 +52,9 @@
               lang: window.kangxi_lang_en,
             },
           );
+          window.editor.contentChanged = editor => {
+            console.log(`Content changed: ${editor.contentHTML}`);
+          };
         }
       });
 

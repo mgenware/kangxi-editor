@@ -31,7 +31,15 @@ function createState(
 }
 
 export class Editor {
-  static create(element: HTMLElement, opt?: Option): Editor {
+  view: EditorView;
+  schema: Schema;
+  plugins: Plugin[];
+  rootElement: HTMLElement;
+  toolbarElement: HTMLElement;
+  contentElement: HTMLElement;
+  contentChanged?: (sender: Editor) => void;
+
+  constructor(element: HTMLElement, opt?: Option) {
     throwIfEmpty(element, 'element');
     opt = opt || {};
 
@@ -42,32 +50,26 @@ export class Editor {
       setupToolbar(opt.lang || {}),
     ];
     const state = createState(opt.contentHTML || '', editorSchema, plugins);
-
     const view = new EditorView(element, {
       state,
-      dispatchTransaction(transaction: Transaction) {
+      dispatchTransaction: (transaction: Transaction) => {
         const newState = view.state.apply(transaction);
         view.updateState(newState);
+        if (transaction.docChanged) {
+          this.contentChanged?.(this);
+        }
       },
     });
-    return new Editor(view, editorSchema, plugins, element);
-  }
 
-  toolbarElement: HTMLElement;
-  contentElement: HTMLElement;
-
-  constructor(
-    public view: EditorView,
-    public schema: Schema,
-    public plugins: Plugin[],
-    public rootElement: HTMLElement,
-  ) {
-    this.toolbarElement = rootElement.querySelector(
+    this.toolbarElement = element.querySelector(
       '.' + ToolBarClass,
     ) as HTMLElement;
-    this.contentElement = rootElement.querySelector(
-      '.ProseMirror',
-    ) as HTMLElement;
+    this.contentElement = element.querySelector('.ProseMirror') as HTMLElement;
+
+    this.view = view;
+    this.schema = editorSchema;
+    this.rootElement = element;
+    this.plugins = plugins;
   }
 
   get contentHTML(): string {
