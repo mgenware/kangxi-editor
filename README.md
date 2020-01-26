@@ -27,7 +27,7 @@ import 'kangxi-editor/dist/editor.css';
 // Translation data
 import EditorLang from 'kangxi-editor/dist/langs/en';
 
-const editor = Editor.create(document.getElementById('editor'), {
+const editor = new Editor(document.getElementById('editor'), {
   contentHTML: '<p>Hello World</p>',
   lang: EditorLang,
 });
@@ -53,7 +53,7 @@ For browsers:
         console.error('kangxi not installed');
       } else {
         // Use `window.kangxi.Editor` to access the `Editor` type in browser build
-        window.editor = window.kangxi.Editor.create(
+        window.editor = new window.kangxi.Editor(
           document.getElementById('editor'),
           {
             contentHTML: `<p>Hello World</p>`,
@@ -85,18 +85,20 @@ class Editor {
   toolbarElement: HTMLElement;
   // The HTML element where editor content area is mounted.
   contentElement: HTMLElement;
+  // Fires when editor content changes.
+  contentChanged?: (sender: Editor) => void;
 
-  // Creates an editor.
+  // Creates a new editor.
   //  * `src`: HTML element or a query selector to mount the editor.
-  //  * `opt`: Options [see details below]
-  static create(src: string | HTMLElement, opt?: Option): Editor;
+  //  * `opt`: Options [see details below].
+  constructor(src: string | HTMLElement, opt?: Option): Editor;
 }
 
 // Options
 interface Option {
   // Initial content HTML upon creation.
   contentHTML?: string;
-  // Translation data.
+  // Localized strings.
   lang?: { [key: string]: string };
 }
 ```

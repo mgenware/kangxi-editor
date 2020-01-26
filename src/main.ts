@@ -31,12 +31,19 @@ function createState(
 }
 
 export class Editor {
+  // The underlying ProseMirror editor view.
   view: EditorView;
+  // The underlying ProseMirror document schema.
   schema: Schema;
+  // The underlying ProseMirror plugin array mounted.
   plugins: Plugin[];
+  // The HTML element where editor is mounted.
   rootElement: HTMLElement;
+  // The HTML element where editor toolbar is mounted.
   toolbarElement: HTMLElement;
+  // The HTML element where editor content area is mounted.
   contentElement: HTMLElement;
+  // Fires when editor content changes.
   contentChanged?: (sender: Editor) => void;
 
   constructor(element: HTMLElement, opt?: Option) {
@@ -72,6 +79,7 @@ export class Editor {
     this.plugins = plugins;
   }
 
+  // Gets the inner HTML of the editor.
   get contentHTML(): string {
     const html = this.contentElement.innerHTML;
     // Treat empty content as empty string
@@ -81,6 +89,7 @@ export class Editor {
     return html;
   }
 
+  // Sets the inner HTML of the editor.
   set contentHTML(html: string) {
     html = html || '';
     // DO NOT reuse `editorView.state`, `editorView.state.plugins` is always empty. Use createState to start a new state.
