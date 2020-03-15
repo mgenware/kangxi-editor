@@ -7,7 +7,7 @@
 .kx-editor .ProseMirror {
   padding: 0.8rem 0.5rem;
   height: 250px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .kx-editor .ProseMirror:focus {
