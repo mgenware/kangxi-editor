@@ -1,7 +1,7 @@
 import { Schema } from 'prosemirror-model';
+import { addListNodes } from 'prosemirror-schema-list';
 import nodes from './nodes/nodes';
 import marks from './marks/marks';
-import { addListNodes } from 'prosemirror-schema-list';
 
 const schema0 = new Schema({
   nodes,

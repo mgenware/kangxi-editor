@@ -1,7 +1,7 @@
 // Modified from https://github.com/ProseMirror/prosemirror-menu
 import { Plugin, PluginKey } from 'prosemirror-state';
-import ToolBarItem from './toolbarItem';
 import { EditorView } from 'prosemirror-view';
+import ToolBarItem from './toolbarItem';
 import ToolBarView from './toolbarView';
 
 export default function toolbarPlugin(items: ToolBarItem[]) {

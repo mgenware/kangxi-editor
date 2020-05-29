@@ -1,6 +1,6 @@
 // Modified from https://github.com/ProseMirror/prosemirror-menu
-import ToolBarItem from './toolbarItem';
 import { EditorView } from 'prosemirror-view';
+import ToolBarItem from './toolbarItem';
 import { ToolBarClass } from '../defs';
 
 export default class ToolBarView {
@@ -22,7 +22,7 @@ export default class ToolBarView {
     this.update();
     for (const child of this.items) {
       if (!child.registered) {
-        child.element.addEventListener('mouseup', e => {
+        child.element.addEventListener('mouseup', (e) => {
           e.preventDefault();
           editorView.focus();
           if (child.cmd) {

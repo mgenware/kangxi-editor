@@ -2,12 +2,12 @@ import { baseKeymap } from 'prosemirror-commands';
 import { keymap } from 'prosemirror-keymap';
 import { EditorState, Transaction, Plugin } from 'prosemirror-state';
 import { DOMParser, Schema, Node as ProsemirrorNode } from 'prosemirror-model';
-import { schema as editorSchema } from './schema/schema';
+import { throwIfEmpty } from 'throw-if-arg-empty';
 import { EditorView } from 'prosemirror-view';
 import { history } from 'prosemirror-history';
 import setupToolbar from './toolbar/setup';
-import { throwIfEmpty } from 'throw-if-arg-empty';
 import { buildKeymap } from './keys/keymap';
+import { schema as editorSchema } from './schema/schema';
 import { ToolBarClass } from './defs';
 import Option from './option';
 
@@ -48,6 +48,7 @@ export class Editor {
 
   constructor(element: HTMLElement, opt?: Option) {
     throwIfEmpty(element, 'element');
+    // eslint-disable-next-line no-param-reassign
     opt = opt || {};
 
     const plugins: Plugin[] = [
@@ -91,8 +92,10 @@ export class Editor {
 
   // Sets the inner HTML of the editor.
   set contentHTML(html: string) {
+    // eslint-disable-next-line no-param-reassign
     html = html || '';
-    // DO NOT reuse `editorView.state`, `editorView.state.plugins` is always empty. Use createState to start a new state.
+    // DO NOT reuse `editorView.state`, `editorView.state.plugins` is always empty.
+    // Use createState to start a new state.
     const state = createState(html, this.schema, this.plugins);
     this.view.updateState(state);
   }

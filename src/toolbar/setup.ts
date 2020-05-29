@@ -1,14 +1,14 @@
 // Modified from https://github.com/ProseMirror/prosemirror-menu
 import { toggleMark, setBlockType, wrapIn, lift } from 'prosemirror-commands';
 import { undo, redo } from 'prosemirror-history';
+import { Plugin, EditorState } from 'prosemirror-state';
+import { wrapInList } from 'prosemirror-schema-list';
+import { NodeType } from 'prosemirror-model';
 import { schema } from '../schema/schema';
 import toolbarPlugin from './toolbarPlugin';
-import { Plugin, EditorState } from 'prosemirror-state';
 import icons from './icons';
 import ToolBarItem from './toolbarItem';
 import ToolBarMarkerItem from './toolbarMarkerItem';
-import { wrapInList } from 'prosemirror-schema-list';
-import { NodeType } from 'prosemirror-model';
 
 const IMG_WIDTH = 18;
 
@@ -35,10 +35,10 @@ function iconBtn(title: string, svg: string) {
 }
 
 function canInsert(state: EditorState, nodeType: NodeType) {
-  const $from = state.selection.$from;
-  for (let d = $from.depth; d >= 0; d--) {
-    const index = $from.index(d);
-    if ($from.node(d).canReplaceWith(index, index, nodeType)) {
+  const from = state.selection.$from;
+  for (let d = from.depth; d >= 0; d--) {
+    const index = from.index(d);
+    if (from.node(d).canReplaceWith(index, index, nodeType)) {
       return true;
     }
   }
@@ -113,7 +113,7 @@ export default function setup(lang: { [key: string]: string }): Plugin {
         dispatch(state.tr.replaceSelectionWith(nodes.horizontal_rule.create()));
         return true;
       },
-      state => canInsert(state, nodes.horizontal_rule),
+      (state) => canInsert(state, nodes.horizontal_rule),
     ),
     new ToolBarItem(iconBtn(lang.code, icons.code), toggleMark(marks.code)),
     separator(),

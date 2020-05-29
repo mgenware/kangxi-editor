@@ -2,11 +2,11 @@ import { NodeSpec } from 'prosemirror-model';
 import doc from './doc';
 import paragraph from './paragraph';
 import blockquote from './blockquote';
-import horizontal_rule from './horizontal_rule';
+import horizontalRule from './horizontal_rule';
 import heading from './heading';
-import code_block from './code_block';
+import codeBlock from './code_block';
 import image from './image';
-import hard_break from './hard_break';
+import hardBreak from './hard_break';
 import text from './text';
 
 const nodes: { [name: string]: NodeSpec } = {
@@ -14,11 +14,11 @@ const nodes: { [name: string]: NodeSpec } = {
   paragraph,
   text,
   blockquote,
-  horizontal_rule,
+  horizontalRule,
   heading,
-  code_block,
+  codeBlock,
   image,
-  hard_break,
+  hardBreak,
 };
 
 export default nodes;

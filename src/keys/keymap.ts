@@ -58,6 +58,7 @@ export function buildKeymap(schema: Schema, mapKeys: any) {
         return;
       }
       if (mapped) {
+        // eslint-disable-next-line no-param-reassign
         key = mapped;
       }
     }

@@ -1,6 +1,6 @@
 // Modified from https://github.com/ProseMirror/prosemirror-menu
-import ToolBarItem from './toolbarItem';
 import { EditorState } from 'prosemirror-state';
+import ToolBarItem from './toolbarItem';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function markActive(state: EditorState, type: any) {
