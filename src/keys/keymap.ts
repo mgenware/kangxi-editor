@@ -46,11 +46,11 @@ import { Schema } from 'prosemirror-model';
 // You can suppress or map these bindings by passing a `mapKeys`
 // argument, which maps key names (say `"Mod-B"` to either `false`, to
 // remove the binding, or a new key name string.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function buildKeymap(schema: Schema, mapKeys: any) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function buildKeymap(
+  schema: Schema,
+  mapKeys: any,
+): { [key: string]: any } {
   const keys: { [key: string]: any } = {};
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function bind(key: string, cmd: any) {
     if (mapKeys) {
       const mapped = mapKeys[key];
@@ -96,7 +96,7 @@ export function buildKeymap(schema: Schema, mapKeys: any) {
   bind('Mod-]', sinkListItem(schema.nodes.list_item));
 
   for (let i = 1; i <= 3; i++) {
-    bind('Shift-Ctrl-' + i, setBlockType(schema.nodes.heading, { level: i }));
+    bind(`Shift-Ctrl-${i}`, setBlockType(schema.nodes.heading, { level: i }));
   }
 
   return keys;

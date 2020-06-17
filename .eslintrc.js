@@ -1,6 +1,6 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: ['airbnb-typescript/base', 'plugin:@typescript-eslint/recommended'],
+  extends: ['airbnb-typescript-lite', 'plugin:@typescript-eslint/recommended'],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -16,7 +16,7 @@ module.exports = {
       'LabeledStatement',
       'WithStatement',
     ],
-    'lines-between-class-members': [
+    '@typescript-eslint/lines-between-class-members': [
       'error',
       'always',
       { exceptAfterSingleLine: true },
@@ -29,10 +29,11 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'object-curly-newline': 'off',
     // End of prettier-related rules.
-    'import/prefer-default-export': 'off',
-    'prefer-template': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
+    'import/prefer-default-export': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
 };

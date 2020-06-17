@@ -17,6 +17,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "prepublishOnly": "daizong test",
     "r": "daizong"
   },
   "engines": {
@@ -62,7 +63,7 @@
     "cross-env": "^7.0.2",
     "daizong": "^0.6.1",
     "eslint": "^7.2.0",
-    "eslint-config-airbnb-typescript": "^8.0.2",
+    "eslint-config-airbnb-typescript-lite": "^0.2.0",
     "eslint-plugin-import": "^2.21.2",
     "m-fs": "^3.0.0",
     "makhulu": "^1.2.3",

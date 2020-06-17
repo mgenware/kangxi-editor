@@ -48,7 +48,7 @@ function canInsert(state: EditorState, nodeType: NodeType) {
 // Create an icon for a heading at the given level
 function heading(level: number) {
   return new ToolBarItem(
-    textBtn('H' + level, 'H' + level),
+    textBtn(`H${level}`, `H${level}`),
     setBlockType(schema.nodes.heading, { level }),
   );
 }

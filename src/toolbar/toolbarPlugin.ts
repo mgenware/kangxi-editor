@@ -4,7 +4,7 @@ import { EditorView } from 'prosemirror-view';
 import ToolBarItem from './toolbarItem';
 import ToolBarView from './toolbarView';
 
-export default function toolbarPlugin(items: ToolBarItem[]) {
+export default function toolbarPlugin(items: ToolBarItem[]): Plugin {
   return new Plugin({
     view(editorView: EditorView) {
       const toolbar = new ToolBarView(items, editorView);

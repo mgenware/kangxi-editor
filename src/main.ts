@@ -70,7 +70,7 @@ export class Editor {
     });
 
     this.toolbarElement = element.querySelector(
-      '.' + ToolBarClass,
+      `.${ToolBarClass}`,
     ) as HTMLElement;
     this.contentElement = element.querySelector('.ProseMirror') as HTMLElement;
 

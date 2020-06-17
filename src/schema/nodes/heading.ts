@@ -14,7 +14,7 @@ const nodeSpec: NodeSpec = {
     { tag: 'h6', attrs: { level: 6 } },
   ],
   toDOM(node: ProsemirrorNode) {
-    return ['h' + node.attrs.level, 0];
+    return [`h${node.attrs.level}`, 0];
   },
 };
 
