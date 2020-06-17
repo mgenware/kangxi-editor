@@ -5,13 +5,13 @@ module.exports = {
     },
   },
   build: {
-    run: ['#clean', '#lint', 'rollup -c', 'node ./postbuild/postbuild'],
+    run: ['#clean', '#lint', '#css', 'rollup -c', 'node ./postbuild/postbuild'],
     env: {
       NODE_ENV: 'production',
     },
   },
   dev: {
-    run: ['#clean', 'rollup -c -w'],
+    run: ['#clean', '#css', 'rollup -c -w'],
     env: {
       NODE_ENV: 'development',
     },
@@ -21,5 +21,11 @@ module.exports = {
   },
   test: {
     run: '#build',
+  },
+  css: {
+    run: 'cleancss -o dist/editor.css src/editor.css',
+    before: {
+      mkdir: 'dist',
+    },
   },
 };
