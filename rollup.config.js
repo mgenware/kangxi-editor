@@ -14,7 +14,7 @@ const tsPlugins = [
     browser: true,
   }),
   commonjs(),
-  typescript({ cacheRoot: require('unique-temp-dir')() }),
+  typescript(),
 ];
 
 if (isProd) {
