@@ -48,7 +48,7 @@ import { Schema } from 'prosemirror-model';
 // remove the binding, or a new key name string.
 export function buildKeymap(
   schema: Schema,
-  mapKeys: any,
+  mapKeys: Record<string, unknown> | null,
 ): { [key: string]: any } {
   const keys: { [key: string]: any } = {};
   function bind(key: string, cmd: any) {
@@ -57,9 +57,10 @@ export function buildKeymap(
       if (mapped === false) {
         return;
       }
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (mapped) {
         // eslint-disable-next-line no-param-reassign
-        key = mapped;
+        key = mapped as string;
       }
     }
     keys[key] = cmd;

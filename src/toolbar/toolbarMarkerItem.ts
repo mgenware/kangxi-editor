@@ -2,7 +2,7 @@
 import { EditorState } from 'prosemirror-state';
 import ToolBarItem from './toolbarItem';
 
-function markActive(state: EditorState, type: any) {
+function markActive(state: EditorState, type: any): boolean {
   const { from, $from, to, empty } = state.selection;
   if (empty) {
     return type.isInSet(state.storedMarks || $from.marks());
