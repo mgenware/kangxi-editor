@@ -23,7 +23,8 @@ module.exports = {
     run: '#build',
   },
   css: {
-    run: 'cleancss -o dist/editor.css src/editor.css',
+    run:
+      'cleancss -o dist/editor.css node_modules/prosemirror-view/style/prosemirror.css src/editor.css',
     before: {
       mkdir: 'dist',
     },
