@@ -9,6 +9,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "newLine": "lf",
     "lib": ["es5", "es6", "es2017", "dom", "dom.iterable"]
   },
   "include": ["src/**/*", "tests"],
