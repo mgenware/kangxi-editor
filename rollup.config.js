@@ -15,6 +15,7 @@ export default {
   output: {
     dir: 'static',
     format: 'iife',
+    name: 'kx',
     sourcemap: false,
     entryFileNames: '[name].[hash].js',
     chunkFileNames: '[name].[hash].js',

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Kangxi-editor Example</title>
     <link rel="stylesheet" href="./lib/modern-normalize.css" />
-    <link rel="stylesheet" href="./editor.css" />
+    <link rel="stylesheet" href="./lib/editor.css" />
     <style>
       body {
         padding: 2rem;
@@ -35,9 +35,9 @@
     <button id="darkBtn">Dark theme</button>
     <p><code id="htmlOutput"></code></p>
 
-    <script type="module">
-      import Editor from '../dist/main.js';
-      import en from './en.js';
+    <script src="./static/main.2a37b321.js"></script>
+    <script>
+      const { Editor, en } = window.kx;
 
       function setTheme(name) {
         if (name === 'dark') {

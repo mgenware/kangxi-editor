@@ -9,7 +9,7 @@
   },
   "private": true,
   "dependencies": {
-    "kangxi-editor": "^0.8.0"
+    "kangxi-editor": "^0.10.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",

@@ -514,10 +514,10 @@ json-parse-even-better-errors@^2.3.0:
   resolved "https://registry.yarnpkg.com/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz#7c47805a94319928e05777405dc12e1f7a4ee02d"
   integrity sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==
 
-kangxi-editor@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/kangxi-editor/-/kangxi-editor-0.8.0.tgz#e714f369e233c16be1bc2c0b81bf0abcf487bbdd"
-  integrity sha512-09YWqk/ic5DWcm2OdnrHHFTDOZETBQyjK3avENjVS29R4wvcqYUuI3r+0JNLq6QSFOqX4F5m/X59tCquelF+jg==
+kangxi-editor@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/kangxi-editor/-/kangxi-editor-0.10.0.tgz#411fa13f1f3241f2c6d395cf84b06608ffb963ef"
+  integrity sha512-xIvDfT3m2Onjc7U1dla+XVOGAtjc6pFKhKA9zpofm66qMbzHktPHd4lN8xK1J4/pF7QeCyfojKmQtjKY3/ZQNQ==
   dependencies:
     prosemirror-commands "^1.0.0"
     prosemirror-dropcursor "^1.0.0"
