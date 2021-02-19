@@ -5,7 +5,7 @@ module.exports = {
     },
   },
   build: {
-    run: ['#clean', '#lint', 'rollup -c', 'node ./postbuild/postbuild'],
+    run: ['#clean', '#lint', 'rollup -c'],
     env: {
       NODE_ENV: 'production',
     },
