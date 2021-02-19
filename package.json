@@ -3,7 +3,7 @@
   "version": "0.10.1",
   "description": "Another WYSIWYG editor",
   "type": "module",
-  "exports": "./dist/main.js",
+  "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "author": "Mgen (https://github.com/mgenware)",
   "homepage": "https://github.com/mgenware/kangxi-editor",
