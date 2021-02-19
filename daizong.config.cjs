@@ -4,14 +4,17 @@ module.exports = {
       del: 'dist',
     },
   },
+  prepare: {
+    run: ['#clean', 'cpy "./src/editor.css" dist'],
+  },
   build: {
-    run: ['#clean', '#lint', 'rollup -c'],
+    run: ['#prepare', '#lint', 'rollup -c'],
     env: {
       NODE_ENV: 'production',
     },
   },
   dev: {
-    run: ['#clean', 'rollup -c -w'],
+    run: ['#prepare', 'rollup -c -w'],
     env: {
       NODE_ENV: 'development',
     },
