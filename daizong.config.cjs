@@ -5,28 +5,24 @@ module.exports = {
     },
   },
   build: {
-    run: ['#clean', '#lint', '#css', 'rollup -c', 'node ./postbuild/postbuild'],
+    run: ['#clean', '#lint', 'rollup -c', 'node ./postbuild/postbuild'],
     env: {
       NODE_ENV: 'production',
     },
   },
   dev: {
-    run: ['#clean', '#css', 'rollup -c -w'],
+    run: ['#clean', 'rollup -c -w'],
     env: {
       NODE_ENV: 'development',
     },
+  },
+  serve: {
+    run: ['web-dev-server --open example/ --node-resolve --watch'],
   },
   lint: {
     run: 'eslint --max-warnings 0 --ext .ts src/',
   },
   test: {
     run: '#build',
-  },
-  css: {
-    run:
-      'cleancss -o dist/editor.css node_modules/prosemirror-view/style/prosemirror.css src/editor.css',
-    before: {
-      mkdir: 'dist',
-    },
   },
 };

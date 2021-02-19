@@ -9,6 +9,7 @@ import toolbarPlugin from './toolbarPlugin';
 import icons from './icons';
 import ToolBarItem from './toolbarItem';
 import ToolBarMarkerItem from './toolbarMarkerItem';
+import Lang from '../lang';
 
 const IMG_WIDTH = 18;
 
@@ -49,7 +50,7 @@ function canInsert(state: EditorState, nodeType: NodeType) {
 function heading(level: number) {
   return new ToolBarItem(
     textBtn(`H${level}`, `H${level}`),
-    setBlockType(schema.nodes.heading, { level }),
+    setBlockType(schema.nodes.heading!, { level }),
   );
 }
 
@@ -59,65 +60,48 @@ function separator() {
   return new ToolBarItem(element, null);
 }
 
-export default function setup(lang: { [key: string]: string }): Plugin {
+export default function setup(lang: Partial<Lang>): Plugin {
   const { nodes, marks } = schema;
   return toolbarPlugin([
     heading(1),
     heading(2),
     heading(3),
-    new ToolBarItem(
-      iconBtn('Normal text', icons.text),
-      setBlockType(nodes.paragraph),
-    ),
+    new ToolBarItem(iconBtn('Normal text', icons.text), setBlockType(nodes.paragraph!)),
     separator(),
+    new ToolBarMarkerItem(iconBtn(lang.bold!, icons.bold), toggleMark(marks.strong!), marks.strong),
+    new ToolBarMarkerItem(iconBtn(lang.italic!, icons.italic), toggleMark(marks.em!), marks.em),
     new ToolBarMarkerItem(
-      iconBtn(lang.bold, icons.bold),
-      toggleMark(marks.strong),
-      marks.strong,
-    ),
-    new ToolBarMarkerItem(
-      iconBtn(lang.italic, icons.italic),
-      toggleMark(marks.em),
-      marks.em,
-    ),
-    new ToolBarMarkerItem(
-      iconBtn(lang.underline, icons.underline),
-      toggleMark(marks.underline),
+      iconBtn(lang.underline!, icons.underline),
+      toggleMark(marks.underline!),
       marks.underline,
     ),
     new ToolBarMarkerItem(
-      iconBtn(lang.strikethrough, icons.strikethrough),
-      toggleMark(marks.strikethrough),
+      iconBtn(lang.strikethrough!, icons.strikethrough),
+      toggleMark(marks.strikethrough!),
       marks.strikethrough,
     ),
     separator(),
     new ToolBarItem(
-      iconBtn(lang.numberedList, icons.orderedList),
-      wrapInList(nodes.ordered_list),
+      iconBtn(lang.numberedList!, icons.orderedList),
+      wrapInList(nodes.ordered_list!),
     ),
+    new ToolBarItem(iconBtn(lang.bulletList!, icons.orderedList), wrapInList(nodes.bullet_list!)),
+    new ToolBarItem(iconBtn(lang.blockquote!, icons.quotes), wrapIn(nodes.blockquote!)),
+    new ToolBarItem(iconBtn(lang.decreaseIndent!, icons.indentDecrease), lift),
     new ToolBarItem(
-      iconBtn(lang.bulletList, icons.orderedList),
-      wrapInList(nodes.bullet_list),
-    ),
-    new ToolBarItem(
-      iconBtn(lang.blockquote, icons.quotes),
-      wrapIn(nodes.blockquote),
-    ),
-    new ToolBarItem(iconBtn(lang.decreaseIndent, icons.indentDecrease), lift),
-    new ToolBarItem(
-      iconBtn(lang.horizontalRule, icons.horizontalLine),
+      iconBtn(lang.horizontalRule!, icons.horizontalLine),
       (state, dispatch) => {
         if (!dispatch) {
           throw new Error('Unexpected null `dispatch` argument');
         }
-        dispatch(state.tr.replaceSelectionWith(nodes.horizontal_rule.create()));
+        dispatch(state.tr.replaceSelectionWith(nodes.horizontal_rule!.create()));
         return true;
       },
-      (state) => canInsert(state, nodes.horizontal_rule),
+      (state) => canInsert(state, nodes.horizontal_rule!),
     ),
-    new ToolBarItem(iconBtn(lang.code, icons.code), toggleMark(marks.code)),
+    new ToolBarItem(iconBtn(lang.code!, icons.code), toggleMark(marks.code!)),
     separator(),
-    new ToolBarItem(iconBtn(lang.undo, icons.undo), undo),
-    new ToolBarItem(iconBtn(lang.redo, icons.redo), redo),
+    new ToolBarItem(iconBtn(lang.undo!, icons.undo), undo),
+    new ToolBarItem(iconBtn(lang.redo!, icons.redo), redo),
   ]);
 }

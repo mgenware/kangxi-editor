@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kangxi-editor Example</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/modern-normalize@1.0.0/modern-normalize.min.css"
+    />
+    <link rel="stylesheet" href="./editor.css" />
+    <style>
+      body {
+        padding: 2rem;
+      }
+
+      #editor {
+        padding: 0.5rem;
+        border: 1px solid #eee;
+        margin-bottom: 2rem;
+      }
+
+      .kx-theme-dark {
+        --kx-back-color: black;
+        --kx-text-color: gray;
+        --kx-toolbar-separator-color: #292929;
+        --kx-toolbar-button-color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="content">
+        <div id="editor" class="kx-editor"></div>
+      </div>
+      <button id="getContentBtn">Get content</button>
+      <button id="setContentBtn">Set content</button>
+      <button id="lightBtn">Light theme</button>
+      <button id="darkBtn">Dark theme</button>
+      <hr />
+      <p><code id="htmlOutput"></code></p>
+    </section>
+
+    <script type="module">
+      import Editor from '../dist/main.js';
+
+      function setTheme(name) {
+        if (name === 'dark') {
+          document.body.classList.add('kx-theme-dark');
+        } else if (name === 'light') {
+          document.body.classList.remove('kx-theme-dark');
+        } else {
+          alert(`Unsupported theme "${name}"`);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        window.editor = new Editor(document.getElementById('editor'), {
+          contentHTML: `<h2>kangxi-editor</h2><hr/>
+<p>I like <code>printf</code> and <code>scanf</code>.</p>`,
+          lang: window.kangxi_lang_en,
+        });
+        window.editor.contentChanged = (editor) => {
+          console.log(`Content changed: ${editor.contentHTML}`);
+        };
+      });
+
+      document.getElementById('getContentBtn').addEventListener('click', () => {
+        if (!window.editor) {
+          console.error('Editor not created');
+        } else {
+          document.getElementById('htmlOutput').textContent = window.editor.contentHTML;
+        }
+      });
+
+      document.getElementById('setContentBtn').addEventListener('click', () => {
+        if (!window.editor) {
+          console.error('Editor not created');
+        } else {
+          window.editor.contentHTML = `<p>New <b>document</b></p>`;
+        }
+      });
+
+      document.getElementById('lightBtn').addEventListener('click', () => {
+        setTheme('light');
+      });
+
+      document.getElementById('darkBtn').addEventListener('click', () => {
+        setTheme('dark');
+      });
+    </script>
+  </body>
+</html>

@@ -1,17 +1,4 @@
 {
-  "compilerOptions": {
-    "module": "esnext",
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "target": "es5",
-    "declaration": true,
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "newLine": "lf",
-    "lib": ["es5", "es6", "es2017", "dom", "dom.iterable"]
-  },
-  "include": ["src/**/*", "tests"],
-  "exclude": ["node_modules"]
+  "extends": "mgenware-tsconfig-wc",
+  "include": ["src/**/*", "tests"]
 }

@@ -2,18 +2,19 @@
   "name": "kangxi-editor",
   "version": "0.8.0",
   "description": "Another WYSIWYG editor",
-  "main": "dist/main.js",
-  "types": "dist/main.d.ts",
+  "type": "module",
+  "exports": "./dist/main.js",
+  "types": "./dist/main.d.ts",
   "author": "Mgen (https://www.mgenware.com)",
-  "homepage": "https://github.com/mgenware/kangxi",
-  "bugs": "https://github.com/mgenware/kangxi/issues",
+  "homepage": "https://github.com/mgenware/kangxi-editor",
+  "bugs": "https://github.com/mgenware/kangxi-editor/issues",
   "keywords": [
-    "kangxi",
-    "editor"
+    "editor",
+    "richtext"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mgenware/kangxi.git"
+    "url": "https://github.com/mgenware/kangxi-editor.git"
   },
   "license": "MIT",
   "scripts": {
@@ -45,7 +46,6 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.0.1",
     "@types/prosemirror-commands": "^1.0.3",
     "@types/prosemirror-dropcursor": "^1.0.0",
@@ -59,18 +59,19 @@
     "@types/prosemirror-view": "^1.16.1",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
-    "clean-css-cli": "^4.3.0",
+    "@web/dev-server": "^0.1.8",
     "cross-env": "^7.0.3",
     "daizong": "^0.12.2",
     "eslint": "^7.17.0",
     "eslint-config-airbnb-typescript-lite": "^12.0.0",
     "eslint-config-mgenware": "^0.0.5",
     "eslint-plugin-import": "^2.22.1",
-    "m-fs": "^4.0.0",
+    "m-fs": "^5.0.0",
     "makhulu": "^1.4.0",
+    "mgenware-tsconfig-wc": "^2.0.3",
     "rollup": "^2.35.1",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.29.0",
+    "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.1.3"
   }
 }

@@ -9,11 +9,7 @@ import {
   lift,
   selectParentNode,
 } from 'prosemirror-commands';
-import {
-  splitListItem,
-  liftListItem,
-  sinkListItem,
-} from 'prosemirror-schema-list';
+import { splitListItem, liftListItem, sinkListItem } from 'prosemirror-schema-list';
 import { undo, redo } from 'prosemirror-history';
 import { undoInputRule } from 'prosemirror-inputrules';
 import { Schema } from 'prosemirror-model';
@@ -76,13 +72,13 @@ export function buildKeymap(
   bind('Mod-BracketLeft', lift);
   bind('Escape', selectParentNode);
 
-  bind('Mod-b', toggleMark(schema.marks.strong));
-  bind('Mod-i', toggleMark(schema.marks.em));
-  bind('Mod-i', toggleMark(schema.marks.underline));
-  bind('Mod-`', toggleMark(schema.marks.code));
+  bind('Mod-b', toggleMark(schema.marks.strong!));
+  bind('Mod-i', toggleMark(schema.marks.em!));
+  bind('Mod-i', toggleMark(schema.marks.underline!));
+  bind('Mod-`', toggleMark(schema.marks.code!));
 
   {
-    const br = schema.nodes.hard_break;
+    const br = schema.nodes.hard_break!;
     const cmd = chainCommands(exitCode, (state, dispatch) => {
       if (dispatch) {
         dispatch(state.tr.replaceSelectionWith(br.create()).scrollIntoView());
@@ -92,12 +88,12 @@ export function buildKeymap(
     bind('Shift-Enter', cmd);
   }
 
-  bind('Enter', splitListItem(schema.nodes.list_item));
-  bind('Mod-[', liftListItem(schema.nodes.list_item));
-  bind('Mod-]', sinkListItem(schema.nodes.list_item));
+  bind('Enter', splitListItem(schema.nodes.list_item!));
+  bind('Mod-[', liftListItem(schema.nodes.list_item!));
+  bind('Mod-]', sinkListItem(schema.nodes.list_item!));
 
   for (let i = 1; i <= 3; i++) {
-    bind(`Shift-Ctrl-${i}`, setBlockType(schema.nodes.heading, { level: i }));
+    bind(`Shift-Ctrl-${i}`, setBlockType(schema.nodes.heading!, { level: i }));
   }
 
   return keys;
