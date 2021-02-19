@@ -1,0 +1,21 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "author": "Mgenware (https://github.com/mgenware)",
+  "main": "main.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "del-cli static && rollup -c"
+  },
+  "private": true,
+  "dependencies": {
+    "kangxi-editor": "^0.8.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "del-cli": "^3.0.1",
+    "rollup": "^2.39.0",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}
