@@ -5,12 +5,12 @@
   "type": "module",
   "exports": "./dist/main.js",
   "types": "./dist/main.d.ts",
-  "author": "Mgen (https://www.mgenware.com)",
+  "author": "Mgen (https://github.com/mgenware)",
   "homepage": "https://github.com/mgenware/kangxi-editor",
   "bugs": "https://github.com/mgenware/kangxi-editor/issues",
   "keywords": [
     "editor",
-    "richtext"
+    "richtext editor"
   ],
   "repository": {
     "type": "git",
@@ -60,17 +60,13 @@
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "@web/dev-server": "^0.1.8",
-    "cross-env": "^7.0.3",
     "daizong": "^0.12.2",
     "eslint": "^7.17.0",
     "eslint-config-airbnb-typescript-lite": "^12.0.0",
     "eslint-config-mgenware": "^0.0.5",
     "eslint-plugin-import": "^2.22.1",
-    "m-fs": "^5.0.0",
-    "makhulu": "^1.4.0",
     "mgenware-tsconfig-wc": "^2.0.3",
     "rollup": "^2.35.1",
-    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.1.3"
   }
