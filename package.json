@@ -1,6 +1,6 @@
 {
   "name": "kangxi-editor",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Another WYSIWYG editor",
   "type": "module",
   "exports": "./dist/main.js",
