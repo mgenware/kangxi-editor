@@ -5,7 +5,10 @@ module.exports = {
     },
   },
   prepare: {
-    run: ['#clean', 'cpy "./src/editor.css" dist'],
+    run: [
+      '#clean',
+      'simple-concat-files "./node_modules/prosemirror-view/style/prosemirror.css" "./src/editor.css" "./dist/editor.css"',
+    ],
   },
   build: {
     run: ['#prepare', '#lint', 'rollup -c'],
