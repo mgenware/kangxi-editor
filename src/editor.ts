@@ -8,7 +8,7 @@ import { history } from 'prosemirror-history';
 import setupToolbar from './toolbar/setup';
 import { buildKeymap } from './keys/keymap';
 import { schema as editorSchema } from './schema/schema';
-import { ToolBarClass } from './defs';
+import { contentClass, toolBarClass } from './defs';
 import Options from './options';
 
 function createDoc(html: string, schema: Schema): ProsemirrorNode {
@@ -65,8 +65,9 @@ export default class Editor {
       },
     });
 
-    this.toolbarElement = element.querySelector(`.${ToolBarClass}`) as HTMLElement;
+    this.toolbarElement = element.querySelector(`.${toolBarClass}`) as HTMLElement;
     this.contentElement = element.querySelector('.ProseMirror') as HTMLElement;
+    this.contentElement.classList.add(contentClass);
 
     this.view = view;
     this.schema = editorSchema;

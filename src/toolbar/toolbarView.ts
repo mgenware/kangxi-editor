@@ -1,7 +1,7 @@
 // Modified from https://github.com/ProseMirror/prosemirror-menu
 import { EditorView } from 'prosemirror-view';
 import ToolBarItem from './toolbarItem';
-import { ToolBarClass } from '../defs';
+import { toolBarClass } from '../defs';
 
 export default class ToolBarView {
   items: ToolBarItem[];
@@ -9,7 +9,7 @@ export default class ToolBarView {
 
   constructor(userItems: ToolBarItem[], public editorView: EditorView) {
     const element = document.createElement('div');
-    element.className = ToolBarClass;
+    element.className = toolBarClass;
     const items: ToolBarItem[] = [];
     for (const child of userItems) {
       if (child.cmd) {

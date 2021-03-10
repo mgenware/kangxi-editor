@@ -1,1 +1,2 @@
-export const ToolBarClass = 'kx-toolbar';
+export const toolBarClass = 'kx-toolbar';
+export const contentClass = 'kx-content';
