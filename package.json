@@ -18,8 +18,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "prepublishOnly": "daizong test",
-    "r": "daizong"
+    "r": "daizong",
+    "test": "daizong build"
   },
   "engines": {
     "node": ">=10.0.0"
