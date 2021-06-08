@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Kangxi-editor Example</title>
-    <link rel="stylesheet" href="./lib/modern-normalize.css" />
-    <link rel="stylesheet" href="./lib/prosemirror.css" />
-    <link rel="stylesheet" href="./lib/editor.css" />
+    <link rel="stylesheet" href="./editor.css" />
     <style>
       body {
         padding: 2rem;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+          'Apple Color Emoji', 'Segoe UI Emoji';
       }
 
       #editor {
@@ -26,7 +26,8 @@
         --kx-toolbar-button-color: gray;
       }
     </style>
-  </head>
+  <link rel="stylesheet" href="./modern-normalize.css">
+</head>
 
   <body>
     <div id="editor" class="kx-editor"></div>
@@ -35,55 +36,6 @@
     <button id="lightBtn">Light theme</button>
     <button id="darkBtn">Dark theme</button>
     <p><code id="htmlOutput"></code></p>
-
-    <script src="./static/main.2a37b321.js"></script>
-    <script>
-      const { Editor, en } = window.kx;
-
-      function setTheme(name) {
-        if (name === 'dark') {
-          document.body.classList.add('kx-theme-dark');
-        } else if (name === 'light') {
-          document.body.classList.remove('kx-theme-dark');
-        } else {
-          alert(`Unsupported theme "${name}"`);
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        window.editor = new Editor(document.getElementById('editor'), {
-          contentHTML: `<h2>kangxi-editor</h2><hr/>
-<p>I like <code>printf</code> and <code>scanf</code>.</p>`,
-          lang: en,
-        });
-        window.editor.contentChanged = (editor) => {
-          console.log(`Content changed: ${editor.contentHTML}`);
-        };
-      });
-
-      document.getElementById('getContentBtn').addEventListener('click', () => {
-        if (!window.editor) {
-          console.error('Editor not created');
-        } else {
-          document.getElementById('htmlOutput').textContent = window.editor.contentHTML;
-        }
-      });
-
-      document.getElementById('setContentBtn').addEventListener('click', () => {
-        if (!window.editor) {
-          console.error('Editor not created');
-        } else {
-          window.editor.contentHTML = `<p>New <b>document</b></p>`;
-        }
-      });
-
-      document.getElementById('lightBtn').addEventListener('click', () => {
-        setTheme('light');
-      });
-
-      document.getElementById('darkBtn').addEventListener('click', () => {
-        setTheme('dark');
-      });
-    </script>
+    <script src="./main.f5d19f1f.js"></script>
   </body>
 </html>
