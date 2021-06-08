@@ -1,5 +1,6 @@
 # kangxi-editor
 
+[![Build Status](https://github.com/mgenware/kangxi-editor/workflows/Build/badge.svg)](https://github.com/mgenware/kangxi-editor/actions)
 [![MEAN Module](https://img.shields.io/badge/MEAN%20Module-TypeScript-blue.svg?style=flat-square)](https://github.com/mgenware/MEAN-Module)
 [![npm version](https://img.shields.io/npm/v/kangxi-editor.svg?style=flat-square)](https://npmjs.com/package/kangxi-editor)
 
