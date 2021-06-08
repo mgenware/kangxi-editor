@@ -23,7 +23,7 @@ module.exports = {
     },
   },
   serve: {
-    run: ['web-dev-server --open example/ --node-resolve --watch'],
+    run: ['web-dev-server --open demo/ --node-resolve --watch'],
   },
   lint: {
     run: 'eslint --max-warnings 0 --ext .ts src/',
