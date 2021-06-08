@@ -11,7 +11,7 @@ module.exports = {
     ],
   },
   build: {
-    run: ['#prepare', '#lint', 'rollup -c'],
+    run: ['#prepare', '#lint', 'rollup -c', '#t'],
     env: {
       NODE_ENV: 'production',
     },
@@ -30,5 +30,9 @@ module.exports = {
   },
   test: {
     run: '#build',
+  },
+  // Runs tests (you need to build the project first).
+  t: {
+    run: 'web-test-runner tests/**/*.test.js --node-resolve',
   },
 };
