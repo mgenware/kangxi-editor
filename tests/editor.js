@@ -21,7 +21,19 @@ export class EditorView extends LitElement {
     `;
   }
 
+  static get properties() {
+    return {
+      content: { type: String },
+    };
+  }
+
   editor = null;
+  contentChangedCalls = [];
+
+  constructor() {
+    super();
+    this.content = null;
+  }
 
   render() {
     return html`<div id="editor" class="kx-editor"></div>`;
@@ -29,10 +41,12 @@ export class EditorView extends LitElement {
 
   firstUpdated() {
     this.editor = new Editor(this.shadowRoot.getElementById('editor'), {
-      contentHTML: `<h2>kangxi-editor</h2><hr/>
-<p>I like <code>printf</code> and <code>scanf</code>.</p>`,
+      contentHTML: this.content,
       lang: en,
     });
+    this.editor.contentChanged = (editor) => {
+      this.contentChangedCalls.push(editor.contentHTML);
+    };
   }
 }
 
