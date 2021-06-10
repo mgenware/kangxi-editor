@@ -20,7 +20,7 @@ it('Set content', async () => {
   const { editor } = el;
 
   expect(editor.contentHTML).to.be.eq(
-    '<h2>kangxi-editor</h2><hr contenteditable="false"><p>I like <code>printf</code> and <code>scanf</code>.</p>',
+    '<h2>kangxi-editor</h2><hr><p>I like <code>printf</code> and <code>scanf</code>.</p>',
   );
   editor.contentHTML = '<h1>mod</h1>';
   expect(editor.contentHTML).to.be.eq('<h1>mod</h1>');

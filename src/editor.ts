@@ -1,7 +1,7 @@
 import { baseKeymap } from 'prosemirror-commands';
 import { keymap } from 'prosemirror-keymap';
 import { EditorState, Transaction, Plugin } from 'prosemirror-state';
-import { DOMParser, Schema, Node as ProsemirrorNode } from 'prosemirror-model';
+import { DOMParser, Schema, Node as ProsemirrorNode, DOMSerializer } from 'prosemirror-model';
 import { throwIfEmpty } from 'throw-if-arg-empty';
 import { EditorView } from 'prosemirror-view';
 import { history } from 'prosemirror-history';
@@ -77,9 +77,13 @@ export default class Editor {
 
   // Gets the inner HTML of the editor.
   get contentHTML(): string {
-    const html = this.contentElement.innerHTML;
-    // Treat empty content as empty string
-    if (html === '<p><br></p>') {
+    const fragment = DOMSerializer.fromSchema(this.schema).serializeFragment(
+      this.view.state.doc.content,
+    );
+    const div = document.createElement('div');
+    div.appendChild(fragment);
+    const html = div.innerHTML;
+    if (html === '<p></p>') {
       return '';
     }
     return html;
