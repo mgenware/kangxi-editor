@@ -13,6 +13,20 @@
           'Apple Color Emoji', 'Segoe UI Emoji';
       }
 
+      code {
+        border-radius: 5px;
+        border: 1px solid #bcbec0;
+        padding: 3px;
+        font-family: Monaco, Consolas, 'Andale  Mono', 'DejaVu Sans Mono', monospace;
+      }
+
+      pre code {
+        border-radius: 0px;
+        border: 0px;
+        padding: 4px;
+        font-family: Monaco, Consolas, 'Andale  Mono', 'DejaVu Sans Mono', monospace;
+      }
+
       #editor {
         padding: 0.5rem;
         border: 1px solid #eee;
@@ -35,7 +49,6 @@
     <button id="setContentBtn">Set content</button>
     <button id="lightBtn">Light theme</button>
     <button id="darkBtn">Dark theme</button>
-    <p><code id="htmlOutput"></code></p>
     <script type="module" src="./main.js"></script>
   </body>
 </html>

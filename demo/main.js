@@ -26,7 +26,7 @@ document.getElementById('getContentBtn').addEventListener('click', () => {
   if (!window.editor) {
     console.error('Editor not created');
   } else {
-    document.getElementById('htmlOutput').textContent = window.editor.contentHTML;
+    alert(window.editor.contentHTML);
   }
 });
 
