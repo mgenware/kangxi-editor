@@ -45,7 +45,7 @@ export class EditorView extends LitElement {
       lang: en,
     });
     this.editor.contentChanged = (editor) => {
-      this.contentChangedCalls.push(editor.contentHTML);
+      this.contentChangedCalls.push(editor.contentHTML());
     };
   }
 }

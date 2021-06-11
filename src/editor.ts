@@ -76,7 +76,7 @@ export default class Editor {
   }
 
   // Gets the inner HTML of the editor.
-  get contentHTML(): string {
+  contentHTML(): string {
     const fragment = DOMSerializer.fromSchema(this.schema).serializeFragment(
       this.view.state.doc.content,
     );
@@ -90,9 +90,18 @@ export default class Editor {
   }
 
   // Sets the inner HTML of the editor.
-  set contentHTML(html: string) {
-    // eslint-disable-next-line no-param-reassign
-    html = html || '';
+  // Unlike `resetContentHTML`, this can be reverted by undo.
+  setContentHTML(html: string) {
+    const { state } = this.view;
+    const { doc } = state;
+    const newDoc = createDoc(html, this.schema);
+    const tr = state.tr.replaceWith(0, doc.content.size, newDoc);
+    this.view.dispatch(tr);
+  }
+
+  // Resets the inner HTML of the editor.
+  // Unlike `setContentHTML`, this clears undo history.
+  resetContentHTML(html: string) {
     // DO NOT reuse `editorView.state`, `editorView.state.plugins` is always empty.
     // Use createState to start a new state.
     const state = createState(html, this.schema, this.plugins);

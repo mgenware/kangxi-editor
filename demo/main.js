@@ -1,6 +1,8 @@
 import { Editor } from '../dist/main.js';
 import en from './en.js';
 
+const contentExample = '<h2>Title</h2><hr/><p>New <b>document</b></p>';
+
 function setTheme(name) {
   if (name === 'dark') {
     document.body.classList.add('kx-theme-dark');
@@ -26,16 +28,28 @@ document.getElementById('getContentBtn').addEventListener('click', () => {
   if (!window.editor) {
     console.error('Editor not created');
   } else {
-    alert(window.editor.contentHTML);
+    alert(window.editor.contentHTML());
   }
 });
 
-document.getElementById('setContentBtn').addEventListener('click', () => {
+function setContent(canUndo) {
   if (!window.editor) {
     console.error('Editor not created');
   } else {
-    window.editor.contentHTML = `<p>New <b>document</b></p>`;
+    if (canUndo) {
+      window.editor.setContentHTML(contentExample);
+    } else {
+      window.editor.resetContentHTML(contentExample);
+    }
   }
+}
+
+document.getElementById('setContentBtn').addEventListener('click', () => {
+  setContent(true);
+});
+
+document.getElementById('resetContentBtn').addEventListener('click', () => {
+  setContent(false);
 });
 
 document.getElementById('lightBtn').addEventListener('click', () => {
