@@ -4,7 +4,7 @@
 [![MEAN Module](https://img.shields.io/badge/MEAN%20Module-TypeScript-blue.svg?style=flat-square)](https://github.com/mgenware/MEAN-Module)
 [![npm version](https://img.shields.io/npm/v/kangxi-editor.svg?style=flat-square)](https://npmjs.com/package/kangxi-editor)
 
-Another WYSIWYG editor
+Another web-based rich text editor.
 
 ## Demo
 
@@ -28,8 +28,6 @@ yarn add kangxi-editor
 
 ```js
 class Editor {
-  // Gets or sets the inner HTML of the editor.
-  contentHTML: string;
   // The underlying ProseMirror editor view.
   view: EditorView;
   // The underlying ProseMirror document schema.
@@ -49,6 +47,15 @@ class Editor {
   //  * `src`: HTML element or a query selector to mount the editor.
   //  * `opt`: Options [see details below].
   constructor(src: string | HTMLElement, opt?: Options): Editor;
+
+  // Gets the inner HTML of the editor.
+  contentHTML(): string;
+  // Sets the inner HTML of the editor.
+  // Unlike `resetContentHTML`, this can be reverted by undo.
+  setContentHTML(html: string);
+  // Resets the inner HTML of the editor.
+  // Unlike `setContentHTML`, this clears undo history.
+  resetContentHTML(html: string);
 }
 
 // Options
