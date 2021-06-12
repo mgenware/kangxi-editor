@@ -1,7 +1,7 @@
 {
   "name": "kangxi-editor",
   "version": "0.13.0",
-  "description": "Another WYSIWYG editor",
+  "description": "Another web-based rich text editor",
   "type": "module",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
