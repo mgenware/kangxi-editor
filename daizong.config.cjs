@@ -35,4 +35,7 @@ module.exports = {
   t: {
     run: 'web-test-runner tests/**/*.test.js --node-resolve',
   },
+  tw: {
+    run: 'web-test-runner tests/**/*.test.js --node-resolve --watch',
+  },
 };
