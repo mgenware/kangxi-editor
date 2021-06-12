@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lang: en,
   });
   window.editor.contentChanged = (editor) => {
-    console.log(`Content changed: ${editor.contentHTML}`);
+    console.log(`Content changed: ${editor.contentHTML()}`);
   };
 });
 
