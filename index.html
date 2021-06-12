@@ -13,10 +13,25 @@
           'Apple Color Emoji', 'Segoe UI Emoji';
       }
 
+      code {
+        border-radius: 5px;
+        border: 1px solid #bcbec0;
+        padding: 3px;
+        font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+      }
+
+      pre code {
+        border-radius: 0px;
+        border: 0px;
+        padding: 4px;
+        font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+      }
+
       #editor {
         padding: 0.5rem;
         border: 1px solid #eee;
         margin-bottom: 2rem;
+        min-height: 400px;
       }
 
       .kx-theme-dark {
@@ -32,10 +47,10 @@
   <body>
     <div id="editor" class="kx-editor"></div>
     <button id="getContentBtn">Get content</button>
-    <button id="setContentBtn">Set content</button>
+    <button id="setContentBtn">Set content (can undo)</button>
+    <button id="resetContentBtn">Set content</button>
     <button id="lightBtn">Light theme</button>
     <button id="darkBtn">Dark theme</button>
-    <p><code id="htmlOutput"></code></p>
-    <script src="./main.f5d19f1f.js"></script>
+    <script src="./main.f367b522.js"></script>
   </body>
 </html>

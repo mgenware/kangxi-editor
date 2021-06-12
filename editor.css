@@ -49,7 +49,6 @@ li.ProseMirror-selectednode:after {
 
 .kx-editor .ProseMirror {
   padding: 0.8rem 0.5rem;
-  height: 250px;
   overflow-y: auto;
 }
 
