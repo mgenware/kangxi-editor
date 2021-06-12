@@ -22,7 +22,7 @@ export default class ToolBarView {
     this.update();
     for (const child of this.items) {
       if (!child.registered) {
-        child.element.addEventListener('mouseup', (e) => {
+        child.element.addEventListener('click', (e) => {
           e.preventDefault();
           editorView.focus();
           if (child.cmd) {
