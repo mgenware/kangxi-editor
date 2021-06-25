@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   clean: {
     run: {
       del: 'dist',
@@ -11,7 +11,7 @@ module.exports = {
     ],
   },
   build: {
-    run: ['#prepare', '#lint', 'rollup -c', '#t'],
+    run: ['#prepare', '#lint', 'rollup -c', '#t', '#litcss'],
     env: {
       NODE_ENV: 'production',
     },
@@ -37,5 +37,8 @@ module.exports = {
   },
   tw: {
     run: 'web-test-runner tests/**/*.test.js --node-resolve --watch',
+  },
+  litcss: {
+    run: 'css-to-lit-js ./dist/editor.css',
   },
 };
