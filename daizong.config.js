@@ -39,6 +39,6 @@ export default {
     run: 'web-test-runner tests/**/*.test.js --node-resolve --watch',
   },
   litcss: {
-    run: 'css-to-lit-js ./dist/editor.css',
+    run: ['css-to-lit-js ./dist/editor.css', 'cpy ./editor.css.d.ts ./dist/'],
   },
 };
