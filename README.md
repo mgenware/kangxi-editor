@@ -13,7 +13,7 @@ Another web-based rich text editor.
 ## Installation
 
 ```sh
-yarn add kangxi-editor
+npm add kangxi-editor
 ```
 
 ## Usage
@@ -21,8 +21,8 @@ yarn add kangxi-editor
 ### Example
 
 - Clone or download this repo
-- Build the project `yarn && yarn r build`
-- Run the example in browser `yarn r serve`
+- Build the project `npm i && npm run r build`
+- Run the example in browser `npm run r serve`
 
 ### API
 

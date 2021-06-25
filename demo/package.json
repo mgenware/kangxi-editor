@@ -9,7 +9,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
-    "del-cli": "^3.0.1",
+    "del-cli": "^4.0.0",
     "m-fs": "^5.0.0",
     "rollup": "^2.40.0",
     "rollup-plugin-terser": "^7.0.2"
