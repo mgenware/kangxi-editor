@@ -107,4 +107,12 @@ export default class Editor {
     const state = createState(html, this.schema, this.plugins);
     this.view.updateState(state);
   }
+
+  focus() {
+    this.view.focus();
+  }
+
+  hasFocus(): boolean {
+    return this.view.hasFocus();
+  }
 }
