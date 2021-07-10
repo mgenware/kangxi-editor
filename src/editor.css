@@ -1,6 +1,6 @@
 .kx-editor {
-  background: var(--kx-back-color, white);
-  color: var(--kx-fore-color, black);
+  background: var(--kx-back-color);
+  color: var(--kx-fore-color);
   padding: 0.5rem;
 }
 
@@ -37,25 +37,28 @@
   border-color: transparent;
   filter: brightness(100%);
   transition: all 0.3s ease;
-  color: var(--kx-fore-color, black);
-  background-color: var(--kx-back-color, white);
+  color: var(--kx-fore-color);
+  background-color: var(--kx-back-color);
+}
+
+.kx-toolbar button.is-active,
+.kx-toolbar button:hover:not(.is-disabled) {
+  color: var(--kx-back-color);
+  background-color: var(--kx-fore-color);
 }
 
 .kx-toolbar button svg {
-  fill: var(--kx-fore-color, black);
+  fill: var(--kx-fore-color);
 }
 
-.kx-toolbar button:hover:not(.is-disabled) {
-  filter: brightness(80%);
+.kx-toolbar button.is-active svg,
+.kx-toolbar button:hover:not(.is-disabled) svg {
+  fill: var(--kx-back-color);
 }
 
 .kx-toolbar button.is-disabled {
   opacity: 0.5;
   pointer-events: none;
-}
-
-.kx-toolbar button.is-active {
-  filter: brightness(80%);
 }
 
 /* For textual buttons */
