@@ -27,6 +27,7 @@ export default class ToolBarView {
           editorView.focus();
           if (child.cmd) {
             // Some commands may need the third param, the editor view
+            // eslint-disable-next-line @typescript-eslint/unbound-method
             child.cmd(editorView.state, editorView.dispatch, editorView);
           }
         });

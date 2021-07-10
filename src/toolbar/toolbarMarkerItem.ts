@@ -5,6 +5,8 @@ import ToolBarItem from './toolbarItem';
 function markActive(state: EditorState, type: any): boolean {
   const { from, $from, to, empty } = state.selection;
   if (empty) {
+    // eslint-disable-next-line max-len
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-call
     return type.isInSet(state.storedMarks || $from.marks());
   }
   return state.doc.rangeHasMark(from, to, type);
