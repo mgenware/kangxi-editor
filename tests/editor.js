@@ -14,9 +14,9 @@ export class EditorView extends LitElement {
 
       .kx-theme-dark {
         --kx-back-color: black;
-        --kx-text-color: gray;
+        --kx-fore-color: gray;
         --kx-toolbar-separator-color: #292929;
-        --kx-toolbar-button-color: gray;
+        --kx-fore-color: gray;
       }
     `;
   }

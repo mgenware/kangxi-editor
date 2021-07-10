@@ -1,6 +1,6 @@
 .kx-editor {
   background: var(--kx-back-color, white);
-  color: var(--kx-text-color, black);
+  color: var(--kx-fore-color, black);
   padding: 0.5rem;
 }
 
@@ -37,12 +37,12 @@
   border-color: transparent;
   filter: brightness(100%);
   transition: all 0.3s ease;
-  color: var(--kx-toolbar-button-color, black);
+  color: var(--kx-fore-color, black);
   background-color: var(--kx-back-color, white);
 }
 
 .kx-toolbar button svg {
-  fill: var(--kx-toolbar-button-color, black);
+  fill: var(--kx-fore-color, black);
 }
 
 .kx-toolbar button:hover:not(.is-disabled) {
