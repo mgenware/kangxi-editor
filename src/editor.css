@@ -39,6 +39,7 @@
   transition: all 0.3s ease;
   color: var(--kx-fore-color);
   background-color: var(--kx-back-color);
+  user-select: none;
 }
 
 .kx-toolbar button.is-active,
