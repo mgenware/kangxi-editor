@@ -59,6 +59,7 @@ export function buildKeymap(
         key = mapped as string;
       }
     }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     keys[key] = cmd;
   }
 
