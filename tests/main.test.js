@@ -15,12 +15,6 @@ function checkUndo(editor, enabled) {
   }
 }
 
-function delay(t, v) {
-  return new Promise((resolve) => {
-    setTimeout(resolve.bind(null, v), t);
-  });
-}
-
 it('Internal editor is set up', async () => {
   const el = await fixture(html`<editor-view></editor-view>`);
   const { editor } = el;
@@ -46,7 +40,7 @@ it('setContent', async () => {
 
   // Undo.
   checkUndo(el, true);
-  await expect(editor.contentHTML()).to.be.eq(
+  expect(editor.contentHTML()).to.be.eq(
     '<h2>kangxi-editor</h2><hr><p>I like <code>printf</code> and <code>scanf</code>.</p>',
   );
 });
