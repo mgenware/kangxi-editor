@@ -8,10 +8,12 @@ export default {
     run: [
       '#clean',
       'simple-concat-files "./node_modules/prosemirror-view/style/prosemirror.css" "./src/editor.css" "./dist/editor.css"',
+      'css-to-lit-js ./dist/editor.css',
+      'cpy ./editor.css.d.ts ./dist/',
     ],
   },
   build: {
-    run: ['#prepare', '#lint', 'rollup -c', '#t', '#litcss'],
+    run: ['#prepare', '#lint', 'rollup -c', '#t'],
     env: {
       NODE_ENV: 'production',
     },
@@ -37,8 +39,5 @@ export default {
   },
   tw: {
     run: 'web-test-runner tests/**/*.test.js --node-resolve --watch',
-  },
-  litcss: {
-    run: ['css-to-lit-js ./dist/editor.css', 'cpy ./editor.css.d.ts ./dist/'],
   },
 };
