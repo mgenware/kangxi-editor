@@ -15,11 +15,19 @@ function checkUndo(editor, enabled) {
   }
 }
 
-it('Internal editor is set up', async () => {
+it('Default state', async () => {
   const el = await fixture(html`<editor-view></editor-view>`);
   const { editor } = el;
   expect(editor instanceof Editor).to.eq(true);
   expect(editor.contentHTML()).to.eq('');
+
+  const { rootElement } = editor;
+  expect(rootElement.id).to.eq('editor');
+  const toolbarEl = rootElement.querySelector('.kx-toolbar');
+  const toolbarStyles = window.getComputedStyle(toolbarEl);
+  expect(toolbarStyles.display).to.eq('flex');
+  expect(toolbarStyles.flexWrap).to.eq('wrap');
+  expect(toolbarStyles.paddingBottom).to.eq('3.2px');
 });
 
 it('setContent', async () => {

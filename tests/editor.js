@@ -1,24 +1,27 @@
-import '..';
+import { html, LitElement, css } from 'lit';
 import { Editor } from '..';
 import en from '../demo/en.js';
-import { html, LitElement, css } from 'lit-element';
+import editorStyles from '../dist/editor.css.js';
 
 export class EditorView extends LitElement {
   static get styles() {
-    return css`
-      #editor {
-        padding: 0.5rem;
-        border: 1px solid #eee;
-        margin-bottom: 2rem;
-      }
+    return [
+      editorStyles,
+      css`
+        #editor {
+          padding: 0.5rem;
+          border: 1px solid #eee;
+          margin-bottom: 2rem;
+        }
 
-      .kx-theme-dark {
-        --kx-back-color: black;
-        --kx-fore-color: gray;
-        --kx-toolbar-separator-color: #292929;
-        --kx-fore-color: gray;
-      }
-    `;
+        .kx-theme-dark {
+          --kx-back-color: black;
+          --kx-fore-color: gray;
+          --kx-toolbar-separator-color: #292929;
+          --kx-fore-color: gray;
+        }
+      `,
+    ];
   }
 
   static get properties() {
