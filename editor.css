@@ -65,6 +65,7 @@ li.ProseMirror-selectednode:after {
   padding-bottom: 0.2rem;
   border-bottom: 1px solid var(--kx-toolbar-separator-color, #ddd);
   margin-bottom: 0.2rem;
+  flex-wrap: wrap;
 }
 
 .kx-toolbar button {
@@ -82,6 +83,7 @@ li.ProseMirror-selectednode:after {
   transition: all 0.3s ease;
   color: var(--kx-fore-color);
   background-color: var(--kx-back-color);
+  user-select: none;
 }
 
 .kx-toolbar button.is-active,
@@ -106,7 +108,7 @@ li.ProseMirror-selectednode:after {
 
 /* For textual buttons */
 .kx-toolbar span {
-  font-size: 15px;
+  font-size: 1rem;
   font-weight: bold;
 }
 
