@@ -5,11 +5,11 @@ import { DOMParser, Schema, Node as ProsemirrorNode, DOMSerializer } from 'prose
 import { throwIfEmpty } from 'throw-if-arg-empty';
 import { EditorView } from 'prosemirror-view';
 import { history } from 'prosemirror-history';
-import setupToolbar from './toolbar/setup';
-import { buildKeymap } from './keys/keymap';
-import { schema as editorSchema } from './schema/schema';
-import { contentClass, toolBarClass } from './defs';
-import Options from './options';
+import setupToolbar from './toolbar/setup.js';
+import { buildKeymap } from './keys/keymap.js';
+import { schema as editorSchema } from './schema/schema.js';
+import { contentClass, toolBarClass } from './defs.js';
+import Options from './options.js';
 
 function createDoc(html: string, schema: Schema): ProsemirrorNode {
   const srcElement = document.createElement('div') as HTMLElement;
@@ -51,7 +51,7 @@ export default class Editor {
       history(),
       keymap(buildKeymap(editorSchema, null)),
       keymap(baseKeymap),
-      setupToolbar(opt.lang || {}),
+      setupToolbar(opt.localizedStrings || {}),
     ];
     const state = createState(opt.contentHTML || '', editorSchema, plugins);
     const view = new EditorView(element, {

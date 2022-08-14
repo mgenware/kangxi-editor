@@ -1,4 +1,3 @@
 {
-  "extends": "mgenware-tsconfig-wc",
-  "include": ["src/**/*", "tests"]
+  "extends": "mgenware-tsconfig-browser"
 }

@@ -1,3 +1,4 @@
-export { default as Editor } from './editor';
-export { default as Options } from './options';
-export { default as Lang } from './lang';
+export { default as Editor } from './editor.js';
+export { default as Options } from './options.js';
+export { default as LS } from './ls.js';
+export * from './kxEditor.js';

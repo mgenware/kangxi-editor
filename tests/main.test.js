@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable import/no-duplicates */
 import { html, fixture, expect } from '@open-wc/testing';
-import './editor';
+import '..';
 import { Editor } from '..';
 
 const isDisabledClass = 'is-disabled';
@@ -16,7 +16,7 @@ function checkUndo(editor, enabled) {
 }
 
 it('Default state', async () => {
-  const el = await fixture(html`<editor-view></editor-view>`);
+  const el = await fixture(html`<kx-editor></kx-editor>`);
   const { editor } = el;
   expect(editor instanceof Editor).to.eq(true);
   expect(editor.contentHTML()).to.eq('');
@@ -32,9 +32,8 @@ it('Default state', async () => {
 
 it('setContent', async () => {
   const el = await fixture(
-    html`<editor-view
-      content="<h2>kangxi-editor</h2><hr/><p>I like <code>printf</code> and <code>scanf</code>.</p>"
-    ></editor-view>`,
+    html`<kx-editor
+      content="<h2>kangxi-editor</h2><hr/><p>I like <code>printf</code> and <code>scanf</code>.</p>"></kx-editor>`,
   );
   const { editor } = el;
 
@@ -55,9 +54,8 @@ it('setContent', async () => {
 
 it('resetContent', async () => {
   const el = await fixture(
-    html`<editor-view
-      content="<h2>kangxi-editor</h2><hr/><p>I like <code>printf</code> and <code>scanf</code>.</p>"
-    ></editor-view>`,
+    html`<kx-editor
+      content="<h2>kangxi-editor</h2><hr/><p>I like <code>printf</code> and <code>scanf</code>.</p>"></kx-editor>`,
   );
   const { editor } = el;
 

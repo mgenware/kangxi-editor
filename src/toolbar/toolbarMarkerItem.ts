@@ -1,6 +1,6 @@
 // Modified from https://github.com/ProseMirror/prosemirror-menu
 import { EditorState } from 'prosemirror-state';
-import ToolBarItem from './toolbarItem';
+import ToolBarItem from './toolbarItem.js';
 
 function markActive(state: EditorState, type: any): boolean {
   const { from, $from, to, empty } = state.selection;
@@ -17,7 +17,7 @@ export default class ToolbarMarkerItem extends ToolBarItem {
     super(element, cmd);
   }
 
-  update(state: EditorState) {
+  override update(state: EditorState) {
     const active = markActive(state, this.markType);
     const { element } = this;
     if (active) {

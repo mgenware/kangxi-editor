@@ -1,4 +1,4 @@
-export default interface Lang {
+export default interface LocalizedStrings {
   bold: string;
   italic: string;
   underline: string;

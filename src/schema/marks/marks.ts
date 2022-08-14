@@ -1,10 +1,10 @@
 import { MarkSpec } from 'prosemirror-model';
-import link from './link';
-import em from './em';
-import strong from './strong';
-import code from './code';
-import underline from './underline';
-import strikethrough from './strikethrough';
+import link from './link.js';
+import em from './em.js';
+import strong from './strong.js';
+import code from './code.js';
+import underline from './underline.js';
+import strikethrough from './strikethrough.js';
 
 const marks: { [name: string]: MarkSpec } = {
   link,

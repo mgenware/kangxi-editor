@@ -1,7 +1,7 @@
 // Modified from https://github.com/ProseMirror/prosemirror-menu
 import { EditorView } from 'prosemirror-view';
-import ToolBarItem from './toolbarItem';
-import { toolBarClass } from '../defs';
+import ToolBarItem from './toolbarItem.js';
+import { toolBarClass } from '../defs.js';
 
 export default class ToolBarView {
   items: ToolBarItem[];

@@ -4,12 +4,12 @@ import { undo, redo } from 'prosemirror-history';
 import { Plugin, EditorState } from 'prosemirror-state';
 import { wrapInList } from 'prosemirror-schema-list';
 import { NodeType } from 'prosemirror-model';
-import { schema } from '../schema/schema';
-import toolbarPlugin from './toolbarPlugin';
-import icons from './icons';
-import ToolBarItem from './toolbarItem';
-import ToolBarMarkerItem from './toolbarMarkerItem';
-import Lang from '../lang';
+import { schema } from '../schema/schema.js';
+import toolbarPlugin from './toolbarPlugin.js';
+import icons from './icons.js';
+import ToolBarItem from './toolbarItem.js';
+import ToolBarMarkerItem from './toolbarMarkerItem.js';
+import LS from '../ls.js';
 
 const IMG_WIDTH = 18;
 
@@ -60,7 +60,7 @@ function separator() {
   return new ToolBarItem(element, null);
 }
 
-export default function setup(lang: Partial<Lang>): Plugin {
+export default function setup(lang: Partial<LS>): Plugin {
   const { nodes, marks } = schema;
   return toolbarPlugin([
     heading(1),

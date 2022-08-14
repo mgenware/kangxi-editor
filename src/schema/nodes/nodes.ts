@@ -1,13 +1,13 @@
 import { NodeSpec } from 'prosemirror-model';
-import doc from './doc';
-import paragraph from './paragraph';
-import blockquote from './blockquote';
-import horizontalRule from './horizontal_rule';
-import heading from './heading';
-import codeBlock from './code_block';
-import image from './image';
-import hardBreak from './hard_break';
-import text from './text';
+import doc from './doc.js';
+import paragraph from './paragraph.js';
+import blockquote from './blockquote.js';
+import horizontalRule from './horizontal_rule.js';
+import heading from './heading.js';
+import codeBlock from './code_block.js';
+import image from './image.js';
+import hardBreak from './hard_break.js';
+import text from './text.js';
 
 const nodes: { [name: string]: NodeSpec } = {
   doc,
