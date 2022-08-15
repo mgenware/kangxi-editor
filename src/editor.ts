@@ -49,7 +49,7 @@ export default class Editor {
 
     const plugins: Plugin[] = [
       history(),
-      keymap(buildKeymap(editorSchema, null)),
+      keymap(buildKeymap(editorSchema)),
       keymap(baseKeymap),
       setupToolbar(opt.localizedStrings || {}),
     ];
