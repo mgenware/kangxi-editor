@@ -113,11 +113,20 @@ export class KXEditor extends LitElement {
 
   // Used to store content HTML when editor view is not available.
   private backupContentHTML = '';
-  getContentHTML(): string {
+
+  get contentHTML(): string {
     return this.editor ? this.editor.contentHTML() : this.backupContentHTML;
   }
 
-  setContentHTML(val: string, canUndo: boolean) {
+  set contentHTML(val: string) {
+    this.setContentHTMLInternal(val, true);
+  }
+
+  resetContentHTML(val: string) {
+    this.setContentHTMLInternal(val, false);
+  }
+
+  private setContentHTMLInternal(val: string, canUndo: boolean) {
     this.backupContentHTML = val;
     if (this.editor) {
       if (canUndo) {
@@ -141,6 +150,10 @@ export class KXEditor extends LitElement {
       localizedStrings: this.localizedStrings,
     });
     editor.resetContentHTML(this.backupContentHTML);
+    editor.contentChanged = () => {
+      this.dispatchEvent(new CustomEvent<string>('changed'));
+    };
+
     this.editor = editor;
   }
 

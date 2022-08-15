@@ -51,56 +51,29 @@ export class KXEditorExample extends KXEditor {
           --kx-fore-color: rgb(66, 66, 66);
           --kx-toolbar-separator-color: #9b9b9b;
         }
-
-        .kx-theme-dark {
-          --kx-back-color: black;
-          --kx-fore-color: gray;
-          --kx-toolbar-separator-color: #292929;
-        }
       `,
     ];
   }
 }
 customElements.define('kx-editor-example', KXEditorExample);
 
-function setTheme(name) {
-  if (name === 'dark') {
-    document.body.classList.add('kx-theme-dark');
-  } else if (name === 'light') {
-    document.body.classList.remove('kx-theme-dark');
-  } else {
-    alert(`Unsupported theme "${name}"`);
+function getEditor() {
+  const editor = document.getElementById('editor');
+  if (!editor) {
+    throw new Error('No editor instance found');
   }
+  return editor;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  window.editor = new Editor(document.getElementById('editor'), {
-    contentHTML: `<h2>kangxi-editor</h2><hr/>
-<p>I like <code>printf</code> and <code>scanf</code>.</p>`,
-    lang: en,
-  });
-  window.editor.contentChanged = (editor) => {
-    console.log(`Content changed: ${editor.contentHTML()}`);
-  };
-});
-
 document.getElementById('getContentBtn').addEventListener('click', () => {
-  if (!window.editor) {
-    console.error('Editor not created');
-  } else {
-    alert(window.editor.contentHTML());
-  }
+  alert(getEditor().contentHTML || '""');
 });
 
 function setContent(canUndo) {
-  if (!window.editor) {
-    console.error('Editor not created');
+  if (canUndo) {
+    getEditor().contentHTML = contentExample;
   } else {
-    if (canUndo) {
-      window.editor.setContentHTML(contentExample);
-    } else {
-      window.editor.resetContentHTML(contentExample);
-    }
+    getEditor().resetContentHTML(contentExample);
   }
 }
 
@@ -110,12 +83,4 @@ document.getElementById('setContentBtn').addEventListener('click', () => {
 
 document.getElementById('resetContentBtn').addEventListener('click', () => {
   setContent(false);
-});
-
-document.getElementById('lightBtn').addEventListener('click', () => {
-  setTheme('light');
-});
-
-document.getElementById('darkBtn').addEventListener('click', () => {
-  setTheme('dark');
 });
