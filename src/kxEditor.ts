@@ -146,6 +146,9 @@ export class KXEditor extends LitElement {
     if (!this.editorEl) {
       return;
     }
+    if (!this.localizedStrings) {
+      console.warn('kangxi-editor: Empty localized strings!');
+    }
     const editor = new Editor(this.editorEl, {
       localizedStrings: this.localizedStrings,
     });
