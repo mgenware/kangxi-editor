@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, css, html, CSSResultGroup } from 'lit';
 import { property } from 'lit/decorators.js';
 import Editor from './editor.js';
 import LS from './ls.js';
@@ -7,7 +7,7 @@ const editorID = 'editor';
 
 // A lit-based component based on the core editor.
 export class KXEditor extends LitElement {
-  static override get styles() {
+  static override get styles(): CSSResultGroup {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return css`
       :host {
@@ -122,6 +122,10 @@ export class KXEditor extends LitElement {
     this.setContentHTMLInternal(val, true);
   }
 
+  get coreEditor(): Editor | undefined {
+    return this.editor;
+  }
+
   resetContentHTML(val: string) {
     this.setContentHTMLInternal(val, false);
   }
@@ -138,6 +142,7 @@ export class KXEditor extends LitElement {
   }
 
   private editor?: Editor;
+
   private get editorEl(): HTMLElement | null {
     return this.shadowRoot?.getElementById(editorID) as HTMLElement | null;
   }

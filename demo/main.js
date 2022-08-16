@@ -57,6 +57,9 @@ export class KXEditorExample extends KXEditor {
 }
 customElements.define('kx-editor-example', KXEditorExample);
 
+// Set localized strings.
+document.getElementById('editor').localizedStrings = en;
+
 function getEditor() {
   const editor = document.getElementById('editor');
   if (!editor) {
