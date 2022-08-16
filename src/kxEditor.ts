@@ -158,8 +158,8 @@ export class KXEditor extends LitElement {
       localizedStrings: this.localizedStrings,
     });
     editor.resetContentHTML(this.backupContentHTML);
-    editor.contentChanged = () => {
-      this.dispatchEvent(new CustomEvent<string>('changed'));
+    editor.contentChanged = (ed) => {
+      this.dispatchEvent(new CustomEvent<string>('editor-change', { detail: ed.contentHTML() }));
     };
 
     this.editor = editor;

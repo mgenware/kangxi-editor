@@ -104,29 +104,33 @@ it('Default state', async () => {
 });
 
 it('setContent', async () => {
-  const el = await fixture(html`<t-editor></t-editor>`);
+  const changeList: string[] = [];
+  const el = await fixture(
+    html`<t-editor
+      @editor-change=${(e: CustomEvent<string>) => changeList.push(e.detail)}></t-editor>`,
+  );
 
   expect(el.contentHTML).to.eq('');
   el.contentHTML = '<h1>mod</h1>';
   expect(el.contentHTML).to.be.eq('<h1>mod</h1>');
-  // Should trigger `contentChanged`.
-  expect(el.contentChangedCalls).to.deep.eq(['<h1>mod</h1>']);
 
-  // Undo.
-  checkUndo(el, true);
-  expect(el.contentHTML).to.eq(
-    '<h2>kangxi-editor</h2><hr><p>I like <code>printf</code> and <code>scanf</code>.</p>',
-  );
+  // Should trigger change event.
+  expect(changeList).to.deep.eq(['<h1>mod</h1>']);
 });
 
 it('resetContent', async () => {
-  const el = await fixture(html`<t-editor></t-editor>`);
+  const changeList: string[] = [];
+  const el = await fixture(
+    html`<t-editor
+      @editor-change=${(e: CustomEvent<string>) => changeList.push(e.detail)}></t-editor>`,
+  );
 
   expect(el.contentHTML).to.eq('');
   el.resetContentHTML('<h1>mod</h1>');
   expect(el.contentHTML).to.eq('<h1>mod</h1>');
-  // Should not trigger `contentChanged`.
-  expect(el.contentChangedCalls).to.deep.eq([]);
+
+  // Should not trigger change event.
+  expect(changeList).to.deep.eq([]);
 
   // Undo is not available.
   checkUndo(el, false);
