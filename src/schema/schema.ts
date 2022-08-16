@@ -9,6 +9,6 @@ const schema0 = new Schema({
 });
 
 export const schema = new Schema({
-  nodes: addListNodes(schema0.spec.nodes as any, 'paragraph block*', 'block'),
+  nodes: addListNodes(schema0.spec.nodes, 'paragraph block*', 'block'),
   marks: schema0.spec.marks,
 });

@@ -9,7 +9,7 @@ const mark: MarkSpec = {
   parseDOM: [
     {
       tag: 'a[href]',
-      getAttrs(dom): any {
+      getAttrs(dom) {
         const element = dom as HTMLElement;
         return {
           href: element.getAttribute('href'),

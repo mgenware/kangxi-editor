@@ -51,7 +51,7 @@ export default class Editor {
       history(),
       keymap(buildKeymap(editorSchema)),
       keymap(baseKeymap),
-      setupToolbar(opt.localizedStrings || {}),
+      setupToolbar(opt.localizedStrings),
     ];
     const state = createState(opt.contentHTML || '', editorSchema, plugins);
     const view = new EditorView(element, {

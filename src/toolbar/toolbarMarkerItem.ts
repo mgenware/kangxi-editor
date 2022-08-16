@@ -1,19 +1,18 @@
 // Modified from https://github.com/ProseMirror/prosemirror-menu
-import { EditorState } from 'prosemirror-state';
+import { MarkType } from 'prosemirror-model';
+import { Command, EditorState } from 'prosemirror-state';
 import ToolBarItem from './toolbarItem.js';
 
-function markActive(state: EditorState, type: any): boolean {
+function markActive(state: EditorState, type: MarkType): boolean {
   const { from, $from, to, empty } = state.selection;
   if (empty) {
-    // eslint-disable-next-line max-len
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-call
-    return type.isInSet(state.storedMarks || $from.marks());
+    return !!type.isInSet(state.storedMarks || $from.marks());
   }
   return state.doc.rangeHasMark(from, to, type);
 }
 
 export default class ToolbarMarkerItem extends ToolBarItem {
-  constructor(element: HTMLElement, cmd: any, public markType: any) {
+  constructor(element: HTMLElement, cmd: Command, public markType: MarkType) {
     super(element, cmd);
   }
 

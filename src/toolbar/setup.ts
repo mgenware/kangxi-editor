@@ -13,9 +13,11 @@ import LS from '../ls.js';
 
 const IMG_WIDTH = 18;
 
-function makeBtn(title: string, content: HTMLElement) {
+function makeBtn(title: string | undefined, content: HTMLElement) {
   const btn = document.createElement('button');
-  btn.title = title;
+  if (title) {
+    btn.title = title;
+  }
   btn.appendChild(content);
   return btn;
 }
@@ -26,7 +28,7 @@ function textBtn(title: string, text: string) {
   return makeBtn(title, span);
 }
 
-function iconBtn(title: string, svg: string) {
+function iconBtn(title: string | undefined, svg: string) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(svg, 'image/svg+xml');
   const element = doc.documentElement;
@@ -60,7 +62,7 @@ function separator() {
   return new ToolBarItem(element, null);
 }
 
-export default function setup(lang: Partial<LS>): Plugin {
+export default function setup(ls: LS | undefined): Plugin {
   const { nodes, marks } = schema;
   return toolbarPlugin([
     heading(1),
@@ -68,28 +70,25 @@ export default function setup(lang: Partial<LS>): Plugin {
     heading(3),
     new ToolBarItem(iconBtn('Normal text', icons.text), setBlockType(nodes.paragraph!)),
     separator(),
-    new ToolBarMarkerItem(iconBtn(lang.bold!, icons.bold), toggleMark(marks.strong!), marks.strong),
-    new ToolBarMarkerItem(iconBtn(lang.italic!, icons.italic), toggleMark(marks.em!), marks.em),
+    new ToolBarMarkerItem(iconBtn(ls?.bold, icons.bold), toggleMark(marks.strong!), marks.strong!),
+    new ToolBarMarkerItem(iconBtn(ls?.italic, icons.italic), toggleMark(marks.em!), marks.em!),
     new ToolBarMarkerItem(
-      iconBtn(lang.underline!, icons.underline),
+      iconBtn(ls?.underline, icons.underline),
       toggleMark(marks.underline!),
-      marks.underline,
+      marks.underline!,
     ),
     new ToolBarMarkerItem(
-      iconBtn(lang.strikethrough!, icons.strikethrough),
+      iconBtn(ls?.strikethrough, icons.strikethrough),
       toggleMark(marks.strikethrough!),
-      marks.strikethrough,
+      marks.strikethrough!,
     ),
     separator(),
+    new ToolBarItem(iconBtn(ls?.numberedList, icons.orderedList), wrapInList(nodes.ordered_list!)),
+    new ToolBarItem(iconBtn(ls?.bulletList, icons.orderedList), wrapInList(nodes.bullet_list!)),
+    new ToolBarItem(iconBtn(ls?.blockquote, icons.quotes), wrapIn(nodes.blockquote!)),
+    new ToolBarItem(iconBtn(ls?.decreaseIndent, icons.indentDecrease), lift),
     new ToolBarItem(
-      iconBtn(lang.numberedList!, icons.orderedList),
-      wrapInList(nodes.ordered_list!),
-    ),
-    new ToolBarItem(iconBtn(lang.bulletList!, icons.orderedList), wrapInList(nodes.bullet_list!)),
-    new ToolBarItem(iconBtn(lang.blockquote!, icons.quotes), wrapIn(nodes.blockquote!)),
-    new ToolBarItem(iconBtn(lang.decreaseIndent!, icons.indentDecrease), lift),
-    new ToolBarItem(
-      iconBtn(lang.horizontalRule!, icons.horizontalLine),
+      iconBtn(ls?.horizontalRule, icons.horizontalLine),
       (state, dispatch) => {
         if (!dispatch) {
           throw new Error('Unexpected null `dispatch` argument');
@@ -99,9 +98,9 @@ export default function setup(lang: Partial<LS>): Plugin {
       },
       (state) => canInsert(state, nodes.horizontal_rule!),
     ),
-    new ToolBarItem(iconBtn(lang.code!, icons.code), toggleMark(marks.code!)),
+    new ToolBarItem(iconBtn(ls?.code, icons.code), toggleMark(marks.code!)),
     separator(),
-    new ToolBarItem(iconBtn(lang.undo!, icons.undo), undo),
-    new ToolBarItem(iconBtn(lang.redo!, icons.redo), redo),
+    new ToolBarItem(iconBtn(ls?.undo, icons.undo), undo),
+    new ToolBarItem(iconBtn(ls?.redo, icons.redo), redo),
   ]);
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-cond-assign */
 // Based on https://github.com/prosemirror/prosemirror-example-setup
 import {
   wrapIn,
@@ -14,9 +15,10 @@ import { wrapInList, splitListItem, liftListItem, sinkListItem } from 'prosemirr
 import { undo, redo } from 'prosemirror-history';
 import { undoInputRule } from 'prosemirror-inputrules';
 import { Command } from 'prosemirror-state';
-import { Schema } from 'prosemirror-model';
+import { MarkType, NodeType, Schema } from 'prosemirror-model';
 
-const mac = typeof navigator != 'undefined' ? /Mac|iP(hone|[oa]d)/.test(navigator.platform) : false;
+const mac =
+  typeof navigator !== 'undefined' ? /Mac|iP(hone|[oa]d)/.test(navigator.platform) : false;
 
 /// Inspect the given schema looking for marks and nodes from the
 /// basic schema, and if found, add key bindings related to them.
@@ -46,12 +48,14 @@ const mac = typeof navigator != 'undefined' ? /Mac|iP(hone|[oa]d)/.test(navigato
 /// argument, which maps key names (say `"Mod-B"` to either `false`, to
 /// remove the binding, or a new key name string.
 export function buildKeymap(schema: Schema, mapKeys?: { [key: string]: false | string }) {
-  let keys: { [key: string]: Command } = {},
-    type;
+  const keys: { [key: string]: Command } = {};
+  let type: NodeType | MarkType | undefined;
+
   function bind(key: string, cmd: Command) {
     if (mapKeys) {
-      let mapped = mapKeys[key];
+      const mapped = mapKeys[key];
       if (mapped === false) return;
+      // eslint-disable-next-line no-param-reassign
       if (mapped) key = mapped;
     }
     keys[key] = cmd;
@@ -81,11 +85,11 @@ export function buildKeymap(schema: Schema, mapKeys?: { [key: string]: false | s
   if ((type = schema.nodes.ordered_list)) bind('Shift-Ctrl-9', wrapInList(type));
   if ((type = schema.nodes.blockquote)) bind('Ctrl->', wrapIn(type));
   if ((type = schema.nodes.hard_break)) {
-    let br = type,
-      cmd = chainCommands(exitCode, (state, dispatch) => {
-        if (dispatch) dispatch(state.tr.replaceSelectionWith(br.create()).scrollIntoView());
-        return true;
-      });
+    const br = type;
+    const cmd = chainCommands(exitCode, (state, dispatch) => {
+      if (dispatch) dispatch(state.tr.replaceSelectionWith(br.create()).scrollIntoView());
+      return true;
+    });
     bind('Mod-Enter', cmd);
     bind('Shift-Enter', cmd);
     if (mac) bind('Ctrl-Enter', cmd);
@@ -97,10 +101,14 @@ export function buildKeymap(schema: Schema, mapKeys?: { [key: string]: false | s
   }
   if ((type = schema.nodes.paragraph)) bind('Shift-Ctrl-0', setBlockType(type));
   if ((type = schema.nodes.code_block)) bind('Shift-Ctrl-\\', setBlockType(type));
-  if ((type = schema.nodes.heading))
-    for (let i = 1; i <= 6; i++) bind('Shift-Ctrl-' + i, setBlockType(type, { level: i }));
+  if ((type = schema.nodes.heading)) {
+    for (let i = 1; i <= 6; i++) {
+      // eslint-disable-next-line prefer-template
+      bind('Shift-Ctrl-' + i.toString(), setBlockType(type, { level: i }));
+    }
+  }
   if ((type = schema.nodes.horizontal_rule)) {
-    let hr = type;
+    const hr = type;
     bind('Mod-_', (state, dispatch) => {
       if (dispatch) dispatch(state.tr.replaceSelectionWith(hr.create()).scrollIntoView());
       return true;
