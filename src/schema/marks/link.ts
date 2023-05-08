@@ -19,7 +19,8 @@ const mark: MarkSpec = {
     },
   ],
   toDOM(node) {
-    return ['a', node.attrs, 0];
+    const { href, title } = node.attrs;
+    return ['a', { href, title }, 0];
   },
 };
 

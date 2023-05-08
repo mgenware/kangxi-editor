@@ -23,7 +23,8 @@ const nodeSpec: NodeSpec = {
     },
   ],
   toDOM(node: ProsemirrorNode) {
-    return ['img', node.attrs];
+    const { src, alt, title } = node.attrs;
+    return ['img', { src, alt, title }];
   },
 };
 
