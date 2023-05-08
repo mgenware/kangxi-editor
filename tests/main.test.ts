@@ -96,10 +96,10 @@ it('Default state', async () => {
   const el = await fixture<KXEditor>(html`<t-editor></t-editor>`);
   expect(el.contentHTML).to.eq('');
 
-  const { coreEditor } = el;
+  const coreEditor = el.coreEditor!;
   const { rootElement } = coreEditor;
   expect(rootElement.id).to.eq('editor');
-  const toolbarEl = rootElement.querySelector('.kx-toolbar');
+  const toolbarEl = rootElement.querySelector('.kx-toolbar')!;
   const toolbarStyles = window.getComputedStyle(toolbarEl);
   expect(toolbarStyles.display).to.eq('flex');
   expect(toolbarStyles.flexWrap).to.eq('wrap');
@@ -108,7 +108,7 @@ it('Default state', async () => {
 
 it('setContent', async () => {
   const changeList: string[] = [];
-  const el = await fixture(
+  const el = await fixture<KXEditor>(
     html`<t-editor
       @editor-change=${(e: CustomEvent<string>) => changeList.push(e.detail)}></t-editor>`,
   );
@@ -123,7 +123,7 @@ it('setContent', async () => {
 
 it('resetContent', async () => {
   const changeList: string[] = [];
-  const el = await fixture(
+  const el = await fixture<KXEditor>(
     html`<t-editor
       @editor-change=${(e: CustomEvent<string>) => changeList.push(e.detail)}></t-editor>`,
   );
