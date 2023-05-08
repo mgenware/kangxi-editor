@@ -14,11 +14,11 @@ const nodes: { [name: string]: NodeSpec } = {
   paragraph,
   text,
   blockquote,
-  horizontalRule,
+  horizontal_rule: horizontalRule,
   heading,
-  codeBlock,
+  code_block: codeBlock,
   image,
-  hardBreak,
+  hard_break: hardBreak,
 };
 
 export default nodes;
