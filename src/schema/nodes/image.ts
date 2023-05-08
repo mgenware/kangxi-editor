@@ -24,6 +24,7 @@ const nodeSpec: NodeSpec = {
   ],
   toDOM(node: ProsemirrorNode) {
     const { src, alt, title } = node.attrs;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     return ['img', { src, alt, title }];
   },
 };

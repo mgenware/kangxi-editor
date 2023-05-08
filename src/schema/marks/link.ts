@@ -20,6 +20,7 @@ const mark: MarkSpec = {
   ],
   toDOM(node) {
     const { href, title } = node.attrs;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     return ['a', { href, title }, 0];
   },
 };

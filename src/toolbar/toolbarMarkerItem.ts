@@ -1,8 +1,8 @@
 // Modified from https://github.com/ProseMirror/prosemirror-menu
 import { MarkType } from 'prosemirror-model';
 import { Command, EditorState } from 'prosemirror-state';
-import ToolBarItem from './toolbarItem.js';
 import { throwIfFalsy } from 'throw-if-arg-empty';
+import ToolBarItem from './toolbarItem.js';
 
 function markActive(state: EditorState, type: MarkType): boolean {
   const { from, $from, to, empty } = state.selection;
