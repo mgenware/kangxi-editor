@@ -3,8 +3,7 @@ import { toggleMark, setBlockType, wrapIn, lift } from 'prosemirror-commands';
 import { undo, redo } from 'prosemirror-history';
 import { Plugin, EditorState } from 'prosemirror-state';
 import { wrapInList } from 'prosemirror-schema-list';
-import { NodeType } from 'prosemirror-model';
-import { schema } from '../schema/schema.js';
+import { NodeType, Schema } from 'prosemirror-model';
 import toolbarPlugin from './toolbarPlugin.js';
 import icons from './icons.js';
 import ToolBarItem from './toolbarItem.js';
@@ -49,7 +48,7 @@ function canInsert(state: EditorState, nodeType: NodeType) {
 }
 
 // Create an icon for a heading at the given level
-function heading(level: number) {
+function heading(schema: Schema, level: number) {
   return new ToolBarItem(
     textBtn(`H${level}`, `H${level}`),
     setBlockType(schema.nodes.heading!, { level }),
@@ -62,12 +61,12 @@ function separator() {
   return new ToolBarItem(element, null);
 }
 
-export default function setup(ls: LS | undefined): Plugin {
+export default function setup(schema: Schema, ls: LS | undefined): Plugin {
   const { nodes, marks } = schema;
   return toolbarPlugin([
-    heading(1),
-    heading(2),
-    heading(3),
+    heading(schema, 1),
+    heading(schema, 2),
+    heading(schema, 3),
     new ToolBarItem(iconBtn('Normal text', icons.text), setBlockType(nodes.paragraph!)),
     separator(),
     new ToolBarMarkerItem(iconBtn(ls?.bold, icons.bold), toggleMark(marks.strong!), marks.strong!),

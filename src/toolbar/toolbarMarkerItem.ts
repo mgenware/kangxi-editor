@@ -2,6 +2,7 @@
 import { MarkType } from 'prosemirror-model';
 import { Command, EditorState } from 'prosemirror-state';
 import ToolBarItem from './toolbarItem.js';
+import { throwIfFalsy } from 'throw-if-arg-empty';
 
 function markActive(state: EditorState, type: MarkType): boolean {
   const { from, $from, to, empty } = state.selection;
@@ -14,6 +15,7 @@ function markActive(state: EditorState, type: MarkType): boolean {
 export default class ToolbarMarkerItem extends ToolBarItem {
   constructor(element: HTMLElement, cmd: Command, public markType: MarkType) {
     super(element, cmd);
+    throwIfFalsy(markType, 'markType');
   }
 
   override update(state: EditorState) {

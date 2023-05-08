@@ -6,9 +6,10 @@ import { throwIfEmpty } from 'throw-if-arg-empty';
 import { EditorView } from 'prosemirror-view';
 import { history } from 'prosemirror-history';
 import setupToolbar from './toolbar/setup.js';
-import { buildKeymap } from './keys/keymap.js';
-import { schema as editorSchema } from './schema/schema.js';
+import { buildKeymap } from './setup/keymap.js';
+import { buildInputRules } from './setup/inputrules.js';
 import { contentClass, toolBarClass } from './defs.js';
+import { schema as editorSchema } from './schema/schema.js';
 import Options from './options.js';
 
 function createDoc(html: string, schema: Schema): ProsemirrorNode {
@@ -48,10 +49,11 @@ export default class Editor {
     opt = opt || {};
 
     const plugins: Plugin[] = [
-      history(),
+      buildInputRules(editorSchema),
       keymap(buildKeymap(editorSchema)),
       keymap(baseKeymap),
-      setupToolbar(opt.localizedStrings),
+      setupToolbar(editorSchema, opt.localizedStrings),
+      history(),
     ];
     const state = createState(opt.contentHTML || '', editorSchema, plugins);
     const view = new EditorView(element, {
