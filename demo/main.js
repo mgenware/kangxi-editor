@@ -72,12 +72,16 @@ function getEditor() {
 }
 
 document.getElementById('getContentBtn').addEventListener('click', () => {
-  alert(getEditor().contentHTML || '""');
+  alert(getEditor().contentHTML() || '""');
+});
+
+document.getElementById('getTextContentBtn').addEventListener('click', () => {
+  alert(getEditor().contentText() || '""');
 });
 
 function setContent(canUndo) {
   if (canUndo) {
-    getEditor().contentHTML = contentExample;
+    getEditor().setContentHTML(contentExample);
   } else {
     getEditor().resetContentHTML(contentExample);
   }

@@ -50,6 +50,8 @@ class Editor {
 
   // Gets the inner HTML of the editor.
   contentHTML(): string;
+  // Gets the text content of the editor.
+  contentText(): string;
   // Sets the inner HTML of the editor.
   // Unlike `resetContentHTML`, this can be reverted by undo.
   setContentHTML(html: string);

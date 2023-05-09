@@ -114,11 +114,15 @@ export class KXEditor extends LitElement {
   // Used to store content HTML when editor view is not available.
   private backupContentHTML = '';
 
-  get contentHTML(): string {
+  contentHTML(): string {
     return this.editor ? this.editor.contentHTML() : this.backupContentHTML;
   }
 
-  set contentHTML(val: string) {
+  contentText(): string {
+    return this.editor?.contentText() ?? '';
+  }
+
+  setContentHTML(val: string) {
     this.setContentHTMLInternal(val, true);
   }
 

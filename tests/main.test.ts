@@ -95,7 +95,7 @@ function checkUndo(editor: HTMLElement, enabled: boolean) {
 
 it('Default state', async () => {
   const el = await fixture<KXEditor>(html`<t-editor></t-editor>`);
-  expect(el.contentHTML).to.eq('');
+  expect(el.contentHTML()).to.eq('');
 
   const coreEditor = el.coreEditor!;
   const { rootElement } = coreEditor;
@@ -114,9 +114,9 @@ it('setContent', async () => {
       @editor-change=${(e: CustomEvent<string>) => changeList.push(e.detail)}></t-editor>`,
   );
 
-  expect(el.contentHTML).to.eq('');
-  el.contentHTML = '<h1>mod</h1>';
-  expect(el.contentHTML).to.be.eq('<h1>mod</h1>');
+  expect(el.contentHTML()).to.eq('');
+  el.setContentHTML('<h1>mod</h1>');
+  expect(el.contentHTML()).to.be.eq('<h1>mod</h1>');
 
   // Should trigger change event.
   expect(changeList).to.deep.eq(['<h1>mod</h1>']);
@@ -129,9 +129,9 @@ it('resetContent', async () => {
       @editor-change=${(e: CustomEvent<string>) => changeList.push(e.detail)}></t-editor>`,
   );
 
-  expect(el.contentHTML).to.eq('');
+  expect(el.contentHTML()).to.eq('');
   el.resetContentHTML('<h1>mod</h1>');
-  expect(el.contentHTML).to.eq('<h1>mod</h1>');
+  expect(el.contentHTML()).to.eq('<h1>mod</h1>');
 
   // Should not trigger change event.
   expect(changeList).to.deep.eq([]);

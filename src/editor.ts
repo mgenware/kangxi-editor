@@ -77,11 +77,13 @@ export default class Editor {
     this.plugins = plugins;
   }
 
+  private getSchemaFragment() {
+    return DOMSerializer.fromSchema(this.schema).serializeFragment(this.view.state.doc.content);
+  }
+
   // Gets the inner HTML of the editor.
   contentHTML(): string {
-    const fragment = DOMSerializer.fromSchema(this.schema).serializeFragment(
-      this.view.state.doc.content,
-    );
+    const fragment = this.getSchemaFragment();
     const div = document.createElement('div');
     div.appendChild(fragment);
     const html = div.innerHTML;
@@ -89,6 +91,11 @@ export default class Editor {
       return '';
     }
     return html;
+  }
+
+  contentText(): string {
+    const fragment = this.getSchemaFragment();
+    return fragment.textContent ?? '';
   }
 
   // Sets the inner HTML of the editor.
