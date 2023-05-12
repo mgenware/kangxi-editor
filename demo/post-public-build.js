@@ -33,5 +33,4 @@ await Promise.all([
     './node_modules/modern-normalize/modern-normalize.css',
     './public/modern-normalize.css',
   ),
-  fs.promises.copyFile('../dist/editor.css', './public/editor.css'),
 ]);
