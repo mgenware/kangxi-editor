@@ -13,11 +13,6 @@ export class KXEditorExample extends KXEditor {
         :host {
           display: block;
         }
-        body {
-          padding: 2rem;
-          font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
-            'Apple Color Emoji', 'Segoe UI Emoji';
-        }
 
         code {
           border-radius: 5px;
