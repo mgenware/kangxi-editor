@@ -9,10 +9,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: browser-actions/setup-chrome@v1
       - uses: actions/checkout@v2
       - name: Build
         run: |
+          npx playwright install --with-deps webkit
           npm i
           npm run r build
           cd demo
