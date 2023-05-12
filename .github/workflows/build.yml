@@ -1,20 +1,25 @@
-name: Build
+name: Node.js CI
 
-on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        node: ['18']
-    name: Node ${{ matrix.node }}
+        node-version: [18.x]
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: ${{ matrix.node-version }}
       - run: npx playwright install --with-deps webkit
       - run: npm i
       - run: npm test
