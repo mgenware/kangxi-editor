@@ -43,7 +43,7 @@ export class KXEditorExample extends KXEditor {
           padding: 0.5rem;
           border: 1px solid rgb(104, 104, 104);
           margin-bottom: 2rem;
-          min-height: 400px;
+          height: 500px;
         }
 
         :root {
