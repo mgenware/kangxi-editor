@@ -33,10 +33,13 @@ var ee,te;class ne extends g{constructor(){super(...arguments),this.renderOption
    */
 var bl;null===(bl=window.HTMLSlotElement)||void 0===bl||bl.prototype.assignedElements;var kl=function(e,t,n,r){var i,o=arguments.length,s=o<3?t:null===r?r=Object.getOwnPropertyDescriptor(t,n):r;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)s=Reflect.decorate(e,t,n,r);else for(var l=e.length-1;l>=0;l--)(i=e[l])&&(s=(o<3?i(s):o>3?i(t,n,s):i(t,n))||s);return o>3&&s&&Object.defineProperty(t,n,s),s};const xl="editor";class Sl extends ne{constructor(){super(...arguments),Object.defineProperty(this,"localizedStrings",{enumerable:!0,configurable:!0,writable:!0,value:void 0}),Object.defineProperty(this,"backupContentHTML",{enumerable:!0,configurable:!0,writable:!0,value:""}),Object.defineProperty(this,"editor",{enumerable:!0,configurable:!0,writable:!0,value:void 0})}static get styles(){return s`
       :host {
-        display: flex;
-        flex-direction: column;
-        /** Make sure it stretches to parent height */
-        flex: 1 1 auto;
+        height: 100%;
+      }
+
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
       }
 
       /** ======= Start of prosemirror.css ======= */
@@ -114,8 +117,7 @@ var bl;null===(bl=window.HTMLSlotElement)||void 0===bl||bl.prototype.assignedEle
 
         display: flex;
         flex-direction: column;
-        /** Make sure it stretches to parent height */
-        flex: 1 1 auto;
+        height: 100%;
         padding: 0.5rem;
       }
 
@@ -189,7 +191,7 @@ var bl;null===(bl=window.HTMLSlotElement)||void 0===bl||bl.prototype.assignedEle
         margin-left: 2px;
         margin-right: 2px;
       }
-    `}contentHTML(){return this.editor?this.editor.contentHTML():this.backupContentHTML}contentText(){return this.editor?.contentText()??""}setContentHTML(e){this.setContentHTMLInternal(e,!0)}get coreEditor(){return this.editor}resetContentHTML(e){this.setContentHTMLInternal(e,!1)}setContentHTMLInternal(e,t){this.backupContentHTML=e,this.editor&&(t?this.editor.setContentHTML(e):this.editor.resetContentHTML(e))}get editorEl(){return this.shadowRoot?.getElementById(xl)}firstUpdated(){if(!this.editorEl)return;this.localizedStrings||console.warn("kangxi-editor: Empty localized strings!");const e=new vl(this.editorEl,{localizedStrings:this.localizedStrings});e.resetContentHTML(this.backupContentHTML),e.contentChanged=e=>{this.dispatchEvent(new CustomEvent("editor-change",{detail:e.contentHTML()}))},this.editor=e}focus(){this.editor?.view.focus()}render(){return _`<div id=${xl} class="kx-editor flex-full"></div>`}}kl([function(e){return(t,n)=>void 0!==n?((e,t,n)=>{t.constructor.createProperty(n,e)})(e,t,n):wl(e,t)}({type:Object})],Sl.prototype,"localizedStrings",void 0);var Ml={bold:"Bold",italic:"Italic",underline:"Underline",strikethrough:"Strikethrough",numberedList:"Numbered list",bulletList:"Bullet list",blockquote:"Blockquote",decreaseIndent:"Decrease indent",code:"Code",undo:"Undo",redo:"Redo",horizontalRule:"Horizontal Rule"};const Cl="<h2>Title</h2><hr/><p>New <b>document</b></p>";class Ol extends Sl{static get styles(){return[super.styles,s`
+    `}contentHTML(){return this.editor?this.editor.contentHTML():this.backupContentHTML}contentText(){return this.editor?.contentText()??""}setContentHTML(e){this.setContentHTMLInternal(e,!0)}get coreEditor(){return this.editor}resetContentHTML(e){this.setContentHTMLInternal(e,!1)}setContentHTMLInternal(e,t){this.backupContentHTML=e,this.editor&&(t?this.editor.setContentHTML(e):this.editor.resetContentHTML(e))}get editorEl(){return this.shadowRoot?.getElementById(xl)}firstUpdated(){if(!this.editorEl)return;this.localizedStrings||console.warn("kangxi-editor: Empty localized strings!");const e=new vl(this.editorEl,{localizedStrings:this.localizedStrings});e.resetContentHTML(this.backupContentHTML),e.contentChanged=e=>{this.dispatchEvent(new CustomEvent("editor-change",{detail:e.contentHTML()}))},this.editor=e}focus(){this.editor?.view.focus()}render(){return _`<div id=${xl} class="kx-editor"></div>`}}kl([function(e){return(t,n)=>void 0!==n?((e,t,n)=>{t.constructor.createProperty(n,e)})(e,t,n):wl(e,t)}({type:Object})],Sl.prototype,"localizedStrings",void 0);var Ml={bold:"Bold",italic:"Italic",underline:"Underline",strikethrough:"Strikethrough",numberedList:"Numbered list",bulletList:"Bullet list",blockquote:"Blockquote",decreaseIndent:"Decrease indent",code:"Code",undo:"Undo",redo:"Redo",horizontalRule:"Horizontal Rule"};const Cl="<h2>Title</h2><hr/><p>New <b>document</b></p>";class Ol extends Sl{static get styles(){return[super.styles,s`
         :host {
           display: block;
         }
