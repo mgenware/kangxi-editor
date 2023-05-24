@@ -40,12 +40,6 @@ export class KXEditorExample extends KXEditor {
           margin-bottom: 2rem;
           height: 500px;
         }
-
-        :root {
-          --kx-back-color: rgb(255, 255, 255);
-          --kx-fore-color: rgb(66, 66, 66);
-          --kx-toolbar-separator-color: #9b9b9b;
-        }
       `,
     ];
   }

@@ -86,8 +86,6 @@ export class KXEditor extends LitElement {
 
       .kx-editor {
         border: 1px solid var(--kx-separator-color);
-        --kx-back-color: var(--kx-back-color);
-        --kx-fore-color: var(--kx-fore-color);
         --kx-toolbar-separator-color: var(--kx-separator-color);
         background: var(--kx-back-color);
         color: var(--kx-fore-color);
