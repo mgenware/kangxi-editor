@@ -11,10 +11,13 @@ export class KXEditor extends LitElement {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return css`
       :host {
-        display: flex;
-        flex-direction: column;
-        /** Make sure it stretches to parent height */
-        flex: 1 1 auto;
+        height: 100%;
+      }
+
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
       }
 
       /** ======= Start of prosemirror.css ======= */
@@ -92,8 +95,7 @@ export class KXEditor extends LitElement {
 
         display: flex;
         flex-direction: column;
-        /** Make sure it stretches to parent height */
-        flex: 1 1 auto;
+        height: 100%;
         padding: 0.5rem;
       }
 
@@ -237,6 +239,6 @@ export class KXEditor extends LitElement {
 
   // eslint-disable-next-line class-methods-use-this
   override render() {
-    return html`<div id=${editorID} class="kx-editor flex-full"></div>`;
+    return html`<div id=${editorID} class="kx-editor"></div>`;
   }
 }
