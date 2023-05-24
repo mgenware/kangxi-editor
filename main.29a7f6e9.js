@@ -108,8 +108,6 @@ var bl;null===(bl=window.HTMLSlotElement)||void 0===bl||bl.prototype.assignedEle
 
       .kx-editor {
         border: 1px solid var(--kx-separator-color);
-        --kx-back-color: var(--kx-back-color);
-        --kx-fore-color: var(--kx-fore-color);
         --kx-toolbar-separator-color: var(--kx-separator-color);
         background: var(--kx-back-color);
         color: var(--kx-fore-color);
@@ -221,11 +219,5 @@ var bl;null===(bl=window.HTMLSlotElement)||void 0===bl||bl.prototype.assignedEle
           border: 1px solid rgb(104, 104, 104);
           margin-bottom: 2rem;
           height: 500px;
-        }
-
-        :root {
-          --kx-back-color: rgb(255, 255, 255);
-          --kx-fore-color: rgb(66, 66, 66);
-          --kx-toolbar-separator-color: #9b9b9b;
         }
       `]}constructor(){super(),this.localizedStrings=Ml}}function Nl(){const e=document.getElementById("editor");if(!e)throw new Error("No editor instance found");return e}function El(e){e?Nl().setContentHTML(Cl):Nl().resetContentHTML(Cl)}customElements.define("kx-editor-example",Ol),document.getElementById("getContentBtn").addEventListener("click",(()=>{alert(Nl().contentHTML()||'""')})),document.getElementById("getTextContentBtn").addEventListener("click",(()=>{alert(Nl().contentText()||'""')})),document.getElementById("setContentBtn").addEventListener("click",(()=>{El(!0)})),document.getElementById("resetContentBtn").addEventListener("click",(()=>{El(!1)})),e.KXEditorExample=Ol,Object.defineProperty(e,"__esModule",{value:!0})}({});
