@@ -1,6 +1,6 @@
 {
   "name": "kangxi-editor",
-  "version": "0.18.2",
+  "version": "0.18.3",
   "description": "Another web-based rich text editor",
   "type": "module",
   "main": "./dist/main.js",
