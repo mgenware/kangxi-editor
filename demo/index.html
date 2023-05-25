@@ -6,26 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Kangxi editor demo</title>
     <style>
-      body {
-        padding: 2rem;
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
-          'Apple Color Emoji', 'Segoe UI Emoji';
-      }
-
       :root {
         --kx-back-color: rgb(255, 255, 255);
         --kx-fore-color: rgb(66, 66, 66);
         --kx-toolbar-separator-color: #9b9b9b;
+      }
+
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 2rem;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+          'Apple Color Emoji', 'Segoe UI Emoji';
+        display: flex;
+        flex-direction: column;
+        height: 100dvh;
+      }
+
+      kx-editor-example {
+        flex: 1 1 auto;
+      }
+
+      .buttons {
+        flex: 0 0 auto;
       }
     </style>
   </head>
 
   <body>
     <kx-editor-example id="editor"></kx-editor-example>
-    <button id="getContentBtn">Get content</button>
-    <button id="setContentBtn">Set content (can undo)</button>
-    <button id="resetContentBtn">Set content</button>
-    <button id="getTextContentBtn">Get text content</button>
+    <p class="buttons">
+      <button id="getContentBtn">Get content</button>
+      <button id="setContentBtn">Set content (can undo)</button>
+      <button id="resetContentBtn">Set content</button>
+      <button id="getTextContentBtn">Get text content</button>
+    </p>
     <script type="module" src="./main.js"></script>
   </body>
 </html>

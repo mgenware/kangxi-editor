@@ -111,7 +111,8 @@ it('setContent', async () => {
   const changeList: string[] = [];
   const el = await fixture<KXEditor>(
     html`<t-editor
-      @editor-change=${(e: CustomEvent<string>) => changeList.push(e.detail)}></t-editor>`,
+      @editor-change=${(e: CustomEvent<KXEditor>) =>
+        changeList.push(e.detail.contentHTML())}></t-editor>`,
   );
 
   expect(el.contentHTML()).to.eq('');
@@ -126,7 +127,8 @@ it('resetContent', async () => {
   const changeList: string[] = [];
   const el = await fixture<KXEditor>(
     html`<t-editor
-      @editor-change=${(e: CustomEvent<string>) => changeList.push(e.detail)}></t-editor>`,
+      @editor-change=${(e: CustomEvent<KXEditor>) =>
+        changeList.push(e.detail.contentHTML())}></t-editor>`,
   );
 
   expect(el.contentHTML()).to.eq('');

@@ -3,7 +3,7 @@ const runTestCmd = 'wtr dist_tests/**/*.test.js --node-resolve --playwright --br
 export default {
   // Starts development mode: watches and compiles all source files including tests.
   dev: {
-    run: ['#clean', 'tsc -b tests -w'],
+    run: ['#clean', '#prepare', 'tsc -b tests -w'],
     envGroups: ['development'],
   },
   serve: {
@@ -17,7 +17,7 @@ export default {
 
   // Cleans, lints, compiles and runs tests.
   build: {
-    run: ['#clean', 'tsc -b tests', '#lint', '#t'],
+    run: ['#clean', '#prepare', 'tsc -b tests', '#lint', '#t'],
     envGroups: ['production'],
   },
 
@@ -30,6 +30,8 @@ export default {
 
   // Lints the project using ESLint (auto triggered by `npm run r build`).
   lint: 'eslint --max-warnings 0 --ext .ts src/ tests/',
+
+  prepare: 'node sync-css.js',
 
   _: {
     envGroups: {

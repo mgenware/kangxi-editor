@@ -12,6 +12,7 @@ export class KXEditorExample extends KXEditor {
       css`
         :host {
           display: block;
+          height: 100%;
         }
 
         code {
@@ -38,7 +39,7 @@ export class KXEditorExample extends KXEditor {
           padding: 0.5rem;
           border: 1px solid rgb(104, 104, 104);
           margin-bottom: 2rem;
-          height: 500px;
+          height: 100%;
         }
       `,
     ];
